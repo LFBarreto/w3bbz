@@ -1,4 +1,4 @@
-import styled, { StyledInterface, InterpolationFunction } from "styled-components";
+import { InterpolationFunction } from "styled-components";
 import {
   compose,
   flexbox,

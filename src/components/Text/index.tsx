@@ -19,8 +19,6 @@ const uppercase = system({
   },
 });
 
-type FontFamilies = "Tiny" | "Tinier";
-
 type WhiteSpace = "normal" | "nowrap" | "pre" | "pre-line" | "pre-wrap";
 
 export interface TextProps extends BaseStyledProps {
