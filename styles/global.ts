@@ -15,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     background-color: ${(p) => p.theme.colors.background.main};
-    cursor: url('/cursor.ico') 8 8, auto;
   }
 
   [data-reactroot] {
@@ -66,14 +65,14 @@ export const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: "Tinier";
-    src: url("fonts/tinier.regular.otf") format("otf");
+    src: url("fonts/tinier.regular.woff2") format("woff2");
     font-weight: 500;
     font-style: normal;
   }
 
   @font-face {
     font-family: "Tiny";
-    src: url("fonts/tiny.regular.otf") format("otf");
+    src: url("fonts/tiny.regular.woff2") format("woff2");
     font-weight: 500;
     font-style: normal;
   }
