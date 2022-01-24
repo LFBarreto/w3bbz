@@ -51,7 +51,7 @@ export const textVariantStyle: Record<
   },
   paragraph: {
     fontFamily: "Futura",
-    fontWeight: 300
+    fontWeight: 300,
   },
   paragraphLineHeight: {
     fontFamily: "Dots-Bold",

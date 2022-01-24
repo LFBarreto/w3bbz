@@ -34,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
 
     --main: hsla(0, 0%, 0%, 1);
     --sptfy-filter: none;
-    
+    --filter-noise:  url(/images/bg-noise-dark.png);
 
     font-family: monospace;
     width: 100%;
@@ -74,6 +74,12 @@ export const GlobalStyle = createGlobalStyle`
       --main: hsla(0, 0%, 100%, 1);
 
       --sptfy-filter: invert(1);
+      --filter-noise:  url(/images/bg-noise-light.png);
+  }
+
+  .shift-title {
+    text-shadow: 0.3rem 0px var(--p-c80),
+      0.35rem 0px var(--p-c80);
   }
 
   [data-reactroot] {

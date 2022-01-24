@@ -47,7 +47,6 @@ export default function LinkComponent({
   textTransform,
   textOverflow,
   uppercase,
-  whiteSpace,
   ...props
 }: LinkProps) {
   return (

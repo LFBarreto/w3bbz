@@ -17,9 +17,9 @@ const Container = styled(Flex).attrs({
   pr: 6,
   pb: 6,
 })`
-  min-height: calc(100% - calc(152px + 2vw));
+  min-height: calc(100% - 152px);
   z-index: -1;
-  background-image: url(/images/bg-noise.png);
+  background-image: var(--filter-noise);
   background-repeat: repeat;
 `;
 

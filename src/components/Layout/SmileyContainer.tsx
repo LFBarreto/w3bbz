@@ -10,7 +10,7 @@ const SmileyContainer = styled(Flex).attrs({
   height: "70vmin",
 })`
   overflow: hidden;
-  z-index: 0;
+  z-index: 1;
 `;
 
 export default function SmileyContainerComponent() {

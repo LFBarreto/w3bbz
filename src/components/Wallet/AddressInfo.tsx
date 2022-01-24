@@ -2,7 +2,7 @@ import { useConnect } from "wagmi";
 import { Flex, Button } from "../";
 
 export default function AddressInfo() {
-  const [{ data, error: _error, loading }, connect] = useConnect();
+  const [{ data, loading }, connect] = useConnect();
 
   return (
     <Flex flex="1">

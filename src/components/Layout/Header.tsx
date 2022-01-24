@@ -21,7 +21,7 @@ const Container = styled(Flex).attrs({
   flex-wrap: no-wrap;
   width: 100%;
   box-sizing: border-box;
-  min-height: calc(100px + 2vw);
+  min-height: 123px;
   flex-direction: column;
   z-index: 4;
   transform: ${(p) => (p.isOpen ? "translate(0, 152px)" : "none")};
@@ -48,10 +48,10 @@ const ColorBox = styled(Flex).attrs({
   flex: 1,
 })<{ isOpen?: boolean }>`
   position: sticky;
-  top: -152px;
+  top: -174px;
   left: 0;
   width: 100%;
-  min-height: calc(152px + 2vw);
+  min-height: 152px;
   z-index: 0;
   transform: ${(p) => (p.isOpen ? "translate(0, 152px)" : "none")};
 
@@ -71,7 +71,7 @@ const MenuContainer = styled(Flex).attrs({
   left: 0;
   width: 100%;
   height: 152px;
-  box-shadow: 0px 3px 0px 0px currentColor;
+  box-shadow: 0px 5px 0px 0px currentColor;
 `;
 
 export default function Header() {
@@ -99,7 +99,8 @@ export default function Header() {
             id="toggleThemeButton"
             tabIndex={isOpen ? 0 : -1}
             onClick={toggleTheme}
-            variant="tiny"
+            variant="h5"
+            lineHeight="44px"
             noInvert
           >
             {theme === "light" ? "🌝" : "🌚"}

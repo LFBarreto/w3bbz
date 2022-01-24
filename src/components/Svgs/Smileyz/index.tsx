@@ -34,6 +34,7 @@ const Container = styled.svg`
   #path828 {
     transform-origin: 50% 50%;
     animation: ${rotate} 12s linear infinite;
+    will-change: transform;
   }
 
   .RR {

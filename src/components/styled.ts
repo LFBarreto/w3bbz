@@ -42,5 +42,5 @@ export const baseStyles: InterpolationFunction<unknown> = compose(
   color,
   layout,
   overflow,
-  border,
+  border
 );

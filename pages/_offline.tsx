@@ -1,7 +1,7 @@
 import { Flex, Text, ImageFilter } from "../src/components";
 import styled from "styled-components";
 
-const Image = styled(Flex).attrs({
+const NotFoundImage = styled(Flex).attrs({
   position: "absolute",
   width: "100%",
   height: "100%",
@@ -26,17 +26,17 @@ export default function PageOffline() {
       position="relative"
       bg="primary.c80"
     >
-      <Image />
+      <NotFoundImage />
       <Text
         variant="h1"
         textAlign="center"
         width="100%"
-        fontSize={"14vw"}
+        fontSize={"30vw"}
         style={{ mixBlendMode: "multiply" }}
         color="primary.c80"
         zIndex={1}
       >
-        Offline
+        404
       </Text>
     </Flex>
   );

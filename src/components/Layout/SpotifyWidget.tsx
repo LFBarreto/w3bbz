@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useWindowScroll } from "react-use";
+import { useRouter } from "next/router";
 import Flex from "./Flex";
 
 const WidgetContainer = styled(Flex).attrs({
@@ -20,16 +21,23 @@ const WidgetContainer = styled(Flex).attrs({
 
 export default function SpotifyWidget() {
   const [height, setHeight] = useState(0);
+  const router = useRouter();
   const { y } = useWindowScroll();
 
   useEffect(() => {
-    setHeight(document.body.scrollHeight - document.body.clientHeight);
+    const handleRouteChange = () => {
+      setHeight(document.body.scrollHeight - document.body.clientHeight);
+    };
+    handleRouteChange();
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
   }, []);
 
-  console.log(y, height);
-
   return (
-    <WidgetContainer visible={height > 0 && y > height - 400}>
+    <WidgetContainer visible={height > 0 && y > height - 200}>
       <iframe
         src="https://open.spotify.com/embed/playlist/5m6fyyrbLJMOv1wrLcAgei?utm_source=generator&theme=0"
         width="100%"
