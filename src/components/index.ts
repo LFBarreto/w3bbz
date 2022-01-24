@@ -1,3 +1,17 @@
 export { default as Flex } from "./Layout/Flex";
+export { default as Header } from "./Layout/Header";
+export { default as Footer } from "./Layout/Footer";
+export { default as SmileyContainer } from "./Layout/SmileyContainer";
+export { default as SpotifyWidget } from "./Layout/SpotifyWidget";
+export { default as Page } from "./Layout/Page";
 export { default as Text } from "./Text";
+export { default as Blockquote } from "./Blockquote";
+export { default as Articles } from "./Articles";
+export { default as Image, ImageFilter } from "./Image";
+export { default as Wagmi } from "./WagmiPage";
+export { default as Button } from "./Button";
+export { default as Link } from "./Link";
+export { default as Banner } from "./Banner";
 export { default as Blobz } from "./Svgs/Blobz";
+export { default as Smileyz } from "./Svgs/Smileyz";
+export { default as ConnectButton } from "./Wallet/ConnectButton";

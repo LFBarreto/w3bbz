@@ -1,0 +1,51 @@
+{
+  "name": "W3BBZ",
+  "short_name": "W3BBZ",
+  "start_url": "/",
+  "background_color": "hsl(120deg 80% 50%)",
+  "theme_color": "hsl(120deg 80% 50%)",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/iconx72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/iconx96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/iconx128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/iconx144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/iconx152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "/iconx192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/iconx384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "/iconx512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

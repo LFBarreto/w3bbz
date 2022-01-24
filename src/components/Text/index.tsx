@@ -32,6 +32,7 @@ export interface TextProps extends BaseStyledProps {
   textOverflow?: string;
   uppercase?: boolean;
   whiteSpace?: WhiteSpace;
+  ref?: any;
 }
 
 const Text = styled.span.attrs<TextProps, TextProps>(
@@ -41,7 +42,7 @@ const Text = styled.span.attrs<TextProps, TextProps>(
   })
 )`
   font-weight: 500;
-  white-space: ${(props) => props.whiteSpace ?? "normal"};
+  white-space: ${(props) => props.whiteSpace ?? "pre-line"};
   ${(p) => textVariantStyle[p.variant || "body"]}
   ${baseStyles}
   ${compose(

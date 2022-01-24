@@ -4,7 +4,10 @@ import {
   DefaultTheme,
   FlattenSimpleInterpolation,
 } from "styled-components";
-import { palettes, ColorPalette } from "./palettes";
+import palette from "./palettes/theme";
+
+export type ThemeNames = "default";
+export type ColorPalette = typeof palette;
 
 /* space indexes:
   0, 1, 2, 3, 4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
@@ -36,8 +39,8 @@ export type ThemeScale<Type, Aliases extends string> = Array<Type> &
   Record<Aliases, Type>;
 
 export const fontSizes = [
-  8, 10, 11, 12, 13, 14, 16, 20, 24, 28, 32, 60,
-] as ThemeScale<number, TextVariants>;
+  '0.5rem', '0.8rem', '1rem', '1.1rem', '1.3rem', '1.5rem', '1.6rem', '1.7rem', '2.2rem', '2.6rem', '3rem', '4rem',
+] as ThemeScale<string, TextVariants>;
 
 [
   fontSizes.micro,
@@ -176,6 +179,27 @@ const overflow = {
   trackSize: 12,
 };
 
+const sizes: Record<string, string> = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  desktop: '2560px'
+}
+
+const devices: Record<string, string> = {
+  mobileS: `(max-width: ${sizes.mobileS})`,
+  mobileM: `(max-width: ${sizes.mobileM})`,
+  mobileL: `(max-width: ${sizes.mobileL})`,
+  tablet: `(max-width: ${sizes.tablet})`,
+  laptop: `(max-width: ${sizes.laptop})`,
+  laptopL: `(max-width: ${sizes.laptopL})`,
+  desktop: `(max-width: ${sizes.desktop})`,
+  desktopL: `(max-width: ${sizes.desktop})`
+};
+
 declare module "styled-components" {
   export interface Font {
     weight: number;
@@ -185,81 +209,40 @@ declare module "styled-components" {
     theme: string;
     animations: typeof animations;
     transition: typeof transition;
+    mediaQuery: typeof mediaQuery;
     overflow: typeof overflow;
-    sizes: {
-      topBarHeight: number;
-      sideBarWidth: number;
-      drawer: {
-        side: {
-          big: {
-            width: number;
-          };
-          small: {
-            width: number;
-          };
-        };
-        popin: {
-          min: {
-            height: number;
-            width: number;
-          };
-          max: {
-            height: number;
-            width: number;
-          };
-        };
-      };
-    };
+    sizes: Record<string, string>;
     radii: number[];
-    fontSizes: number[];
+    fontSizes: string[];
     space: number[];
     shadows: string[];
-    colors: ColorPalette & {
-      /**
-       * @deprecated Do not use the .palette prefix anymore!
-       */
-      palette: ColorPalette;
-    };
+    colors: ColorPalette;
     fontWeights: Record<string, string>;
     zIndexes: number[];
   }
 }
 
+
+
+const mediaQuery = (
+  size = "mobileL",
+  styleString: any,
+): FlattenSimpleInterpolation => css`
+@media ${devices[size]} {
+  ${styleString}
+} 
+`;
+
 const theme: DefaultTheme = {
   theme: "light",
-  sizes: {
-    drawer: {
-      side: {
-        big: {
-          width: 580,
-        },
-        small: {
-          width: 420,
-        },
-      },
-      popin: {
-        min: {
-          height: 158,
-          width: 462,
-        },
-        max: {
-          height: 522,
-          width: 622,
-        },
-      },
-    },
-    topBarHeight: 58,
-    sideBarWidth: 230,
-  },
+  sizes,
+  mediaQuery,
   radii,
   fontSizes,
   fontWeights,
   space,
   shadows,
-  colors: {
-    palette: palettes.light,
-    ...palettes.light,
-  },
+  colors: palette,
   animations,
   overflow,
   transition,

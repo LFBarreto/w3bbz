@@ -1,4 +1,7 @@
 {
-  "hello": "B0NJ0UR LEDGER GUN",
-  "noAccounts": "Pas de compte disponible..."
+  "nav": {
+    "home": "Home",
+    "nft": "NFT",
+    "about": "About"
+  }
 }

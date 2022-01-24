@@ -13,7 +13,6 @@ export const textVariantStyle: Record<
     fontFamily: "Tinier",
     fontWeight: 500,
     "text-transform": "uppercase",
-    lineHeight: "60px",
   },
   h2: {
     fontFamily: "Tinier",
@@ -26,42 +25,43 @@ export const textVariantStyle: Record<
     "text-transform": "uppercase",
   },
   h4: {
-    fontFamily: "Tinier",
+    fontFamily: "Tiny",
     fontWeight: 500,
     "text-transform": "uppercase",
   },
   h5: {
-    fontFamily: "Tinier",
+    fontFamily: "Tiny",
     fontWeight: 500,
     "text-transform": "uppercase",
   },
   large: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots-Bold",
   },
   largeLineHeight: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots-Bold",
     lineHeight: 1.7,
   },
   body: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots-Bold",
     lineHeight: 1.7,
   },
   bodyLineHeight: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots-Bold",
     lineHeight: 1.7,
   },
   paragraph: {
-    fontFamily: "Tiny",
+    fontFamily: "Futura",
+    fontWeight: 300
   },
   paragraphLineHeight: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots-Bold",
     lineHeight: 1.7,
   },
   small: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots",
   },
   extraSmall: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots",
   },
   tiny: {
     fontFamily: "Tiny",
@@ -70,7 +70,7 @@ export const textVariantStyle: Record<
     fontFamily: "Tiny",
   },
   subtitle: {
-    fontFamily: "Tiny",
+    fontFamily: "Dots",
     fontWeight: 600,
     "text-transform": "uppercase",
   },

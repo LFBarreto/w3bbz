@@ -1,0 +1,30 @@
+export default {
+  primary: {
+    c10: "var(--p-c10)",
+    c20: "var(--p-c20)",
+    c30: "var(--p-c30)",
+    c40: "var(--p-c40)",
+    c50: "var(--p-c50)",
+    c60: "var(--p-c60)",
+    c70: "var(--p-c70)",
+    c80: "var(--p-c80)",
+    c90: "var(--p-c90)",
+    c100: "var(--p-c100)",
+  },
+  neutral: {
+    c00: "var(--n-c00)",
+    c20: "var(--n-c20)",
+    c30: "var(--n-c30)",
+    c40: "var(--n-c40)",
+    c50: "var(--n-c50)",
+    c60: "var(--n-c60)",
+    c70: "var(--n-c70)",
+    c80: "var(--n-c80)",
+    c90: "var(--n-c90)",
+    c100: "var(--n-c100)",
+    c100a07: "var(--n-c100a07)",
+  },
+  background: {
+    main: "var(--main)",
+  },
+};

@@ -5,27 +5,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --p . --noEmit"
   },
   "dependencies": {
     "@types/styled-system": "^5.1.15",
+    "ethers": "^5.5.3",
     "modern-normalize": "^1.1.0",
     "next": "12.0.8",
     "next-i18next": "^10.2.0",
+    "next-pwa": "^5.4.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-use": "^17.3.2",
     "rxjs": "^7.5.2",
-    "styled-components": "^5.3.3",
-    "styled-system": "^5.1.5"
+    "styled-components": "^5.2.3",
+    "styled-system": "^5.1.5",
+    "wagmi": "^0.2.0"
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.20",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "babel-plugin-styled-components": "^2.0.2",
     "eslint": "^8.7.0",
     "eslint-config-next": "^12.0.8",
     "prettier": "^2.5.1",
-    "typescript": "^4.5.5",
-    "workbox-webpack-plugin": "^6.4.2"
+    "typescript": "^4.5.5"
   }
 }
