@@ -8,6 +8,7 @@ const Container = styled(Flex).attrs({
   justifyContent: "flex-start",
   overflow: "visible",
   flex: 1,
+  bg: "background.main",
 })`
   flex: 1 0 calc(100% - calc(152px + 2vw));
 `;

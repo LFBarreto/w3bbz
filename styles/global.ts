@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    font-size: calc(9px + 1vw);
+    font-size: calc(10px + 0.6vw);
   }
 
   body {
@@ -32,15 +32,17 @@ export const GlobalStyle = createGlobalStyle`
     --n-c100: hsl(0, 0%, 100%);
     --n-c100a07: hsl(0, 0%, 100%, 0.7);
 
+    --t-contrast: hsl(0,0%,0%);
+
     --main: hsla(0, 0%, 0%, 1);
     --sptfy-filter: none;
     --filter-noise:  url(/images/bg-noise-dark.png);
 
     font-family: monospace;
-    width: 100%;
-    height: 100%;
-    background-color: var(--main);
-
+    width: 100vw;
+    height: 100vh;
+    
+    background-color: var(--p-c80);
     overflow-x: hidden;
     overflow-y: visible;
   }
@@ -57,7 +59,8 @@ export const GlobalStyle = createGlobalStyle`
       --p-c80: hsl(247, 56%, 68%);
       --p-c90: hsl(247, 40%, 53%);
       --p-c100: hsl(247, 46%, 42%);
-    
+
+      --t-contrast: hsl(0,0%,0%);
 
       --n-c00: hsl(0, 0%, 100%);
       --n-c20: hsl(0, 0%, 98%);
@@ -88,7 +91,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     padding: 0px;
-
+    background-color: var(--main);
   }
 
   ::spelling-error  {
@@ -102,7 +105,7 @@ export const GlobalStyle = createGlobalStyle`
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--main);
   }
   
   /* Handle */

@@ -24,6 +24,7 @@ export default {
     c100: "var(--n-c100)",
     c100a07: "var(--n-c100a07)",
   },
+  textContrast: "var(--t-contrast)",
   background: {
     main: "var(--main)",
   },

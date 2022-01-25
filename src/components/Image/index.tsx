@@ -5,7 +5,7 @@ import NextImage from "next/image";
 
 export const ImageFilter = css`
   mix-blend-mode: screen;
-  -webkit-filter: grayscale(100%) contrast(200%);
+  -webkit-filter: grayscale(100%) contrast(100%);
   filter: grayscale(100%) contrast(200%);
   opacity: 1;
   user-select: none;
@@ -17,7 +17,7 @@ const ImageContainer = styled(Flex).attrs({ bg: "primary.c80" })<{
   backgroundPosition?: string;
 }>`
   position: 100vmin;
-  min-height: 300px;
+  min-height: 40vw;
   .inner-img {
     position: relative;
     width: 100%;
@@ -25,7 +25,11 @@ const ImageContainer = styled(Flex).attrs({ bg: "primary.c80" })<{
     background-repeat: no-repeat;
     object-fit: cover;
     ${ImageFilter}
-    z-index: 0;
+    z-index: 1;
+  }
+
+  @media (max-width: 600px) {
+    min-height: 100vmin;
   }
 `;
 

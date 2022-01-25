@@ -54,6 +54,7 @@ export default function ButtonComponent({
   textOverflow,
   uppercase,
   whiteSpace,
+  color,
   ...props
 }: ButtonProps) {
   return (
@@ -69,6 +70,7 @@ export default function ButtonComponent({
         textOverflow={textOverflow}
         uppercase={uppercase}
         whiteSpace={whiteSpace}
+        color={color}
       >
         {children}
       </Text>

@@ -2,8 +2,7 @@
   "name": "W3BBZ",
   "short_name": "W3BBZ",
   "start_url": "/",
-  "background_color": "hsl(120deg 80% 50%)",
-  "theme_color": "hsl(120deg 80% 50%)",
+  "background_color": "#19e619",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [

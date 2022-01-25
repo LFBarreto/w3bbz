@@ -65,6 +65,7 @@ export default function BannerComponent({
       setReady(true);
     }
   }, [ref, width]);
+
   return (
     <Banner ready={ready} {...props}>
       <Text
@@ -80,6 +81,7 @@ export default function BannerComponent({
         uppercase={uppercase}
         whiteSpace={whiteSpace}
         px={8}
+        color="textContrast"
       >
         {children}
       </Text>
@@ -100,6 +102,7 @@ export default function BannerComponent({
               uppercase={uppercase}
               whiteSpace={whiteSpace}
               px={8}
+              color="textContrast"
             >
               {children}
             </Text>

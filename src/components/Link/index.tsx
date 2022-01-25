@@ -46,6 +46,7 @@ export default function LinkComponent({
   lineHeight,
   textTransform,
   textOverflow,
+  color,
   uppercase,
   ...props
 }: LinkProps) {
@@ -62,6 +63,7 @@ export default function LinkComponent({
         textOverflow={textOverflow}
         uppercase={uppercase}
         whiteSpace={"nowrap"}
+        color={color}
       >
         {children} <span className="post-link">{">>>"}</span>
       </Text>

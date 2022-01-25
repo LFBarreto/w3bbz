@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Flex from "./Flex";
 import Text from "../Text";
 import Button from "../Button";
@@ -29,6 +30,8 @@ const Container = styled(Flex).attrs({
 
   #toggleButton {
     transform: rotate(90deg);
+    text-shadow: 0.3rem 0px ${(p) => p.theme.colors.neutral.c00},
+      0.35rem 0px ${(p) => p.theme.colors.neutral.c00};
   }
   #toggleThemeButton {
     position: absolute;
@@ -45,6 +48,7 @@ const Container = styled(Flex).attrs({
 
 const ColorBox = styled(Flex).attrs({
   bg: "primary.c80",
+  color: "primary.c80",
   flex: 1,
 })<{ isOpen?: boolean }>`
   position: sticky;
@@ -54,6 +58,7 @@ const ColorBox = styled(Flex).attrs({
   min-height: 152px;
   z-index: 0;
   transform: ${(p) => (p.isOpen ? "translate(0, 152px)" : "none")};
+  box-shadow: 0px -5px 0px 0px currentColor;
 
   ${(p) => p.theme.transition(["transform"])}
 `;
@@ -92,6 +97,12 @@ export default function Header() {
 
   return (
     <>
+      <Head>
+        <meta
+          name="theme-color"
+          content={theme === "light" ? "hsl(247, 56%, 68%)" : "hsl(0, 0%, 76%)"}
+        />
+      </Head>
       <ColorBox isOpen={isOpen} />
       <Container isOpen={isOpen}>
         <MenuContainer>
@@ -109,6 +120,7 @@ export default function Header() {
             variant="h5"
             onClick={() => router.push("/")}
             tabIndex={isOpen ? 0 : -1}
+            color="textContrast"
           >
             {router.asPath == "/" ? ">>>" : ""}
             {t("home")}
@@ -117,6 +129,7 @@ export default function Header() {
             variant="h5"
             onClick={() => router.push("/nft")}
             tabIndex={isOpen ? 0 : -1}
+            color="textContrast"
           >
             {router.asPath == "/nft" ? ">>>" : undefined}
             {t("nft")}
@@ -125,6 +138,7 @@ export default function Header() {
             variant="h5"
             onClick={() => router.push("/about")}
             tabIndex={isOpen ? 0 : -1}
+            color="textContrast"
           >
             {router.asPath == "/about" ? ">>>" : undefined}
             {t("about")}

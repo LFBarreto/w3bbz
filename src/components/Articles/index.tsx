@@ -35,6 +35,7 @@ const Hashtag = styled(Text).attrs({
   as: "a",
   variant: "body",
   mx: 4,
+  color: "textContrast",
 })<{ href?: string }>`
   text-decoration: none;
   cursor: pointer;

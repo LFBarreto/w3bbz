@@ -1,49 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useWindowScroll } from "react-use";
-import { useRouter } from "next/router";
 import Flex from "./Flex";
 
 const WidgetContainer = styled(Flex).attrs({
-  position: "fixed",
-  bottom: 0,
-  left: 0,
-  width: "50%",
+  position: "sticky",
+  top: "calc(100% - 80px)",
+  right: "100%",
+  bottom: "10px",
   height: 80,
-})<{ visible: boolean }>`
+})<{ visible?: boolean }>`
+  opacity: ${(p) => (p.visible ? 1 : 0)};
+  ${(p) => p.theme.transition(["opacity"])};
   overflow: hidden;
   border-radius: 0 15px 0 0;
   filter: var(--sptfy-filter);
   z-index: 2;
-  transform: ${(p) => (p.visible ? "none" : "translateX(-100%)")};
-  ${(p) => p.theme.transition(["transform"])};
+  width: 50%;
+  min-width: 350px;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export default function SpotifyWidget() {
-  const [height, setHeight] = useState(0);
-  const router = useRouter();
-  const { y } = useWindowScroll();
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setHeight(document.body.scrollHeight - document.body.clientHeight);
-    };
-    handleRouteChange();
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
+  const [ready, setReady] = useState(false);
+  const onLoad = useCallback((evt) => {
+    setReady(evt.target.contentWindow?.window?.length > 0);
   }, []);
 
   return (
-    <WidgetContainer visible={height > 0 && y > height - 200}>
+    <WidgetContainer visible={ready}>
       <iframe
-        src="https://open.spotify.com/embed/playlist/5m6fyyrbLJMOv1wrLcAgei?utm_source=generator&theme=0"
+        src="https://open.spotify.com/embed/playlist/2Dta1TdixfDg0UvumSw7NE?utm_source=generator&theme=0"
         width="100%"
         height="80"
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        onLoad={onLoad}
       ></iframe>
     </WidgetContainer>
   );

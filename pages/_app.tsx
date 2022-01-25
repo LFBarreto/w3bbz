@@ -9,7 +9,6 @@ import {
   Page,
   Footer,
   SmileyContainer,
-  SpotifyWidget,
 } from "../src/components";
 import "modern-normalize";
 
@@ -23,7 +22,10 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         />
         <meta name="application-name" content="W3BBZ" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
         <meta name="apple-mobile-web-app-title" content="W3BBZ" />
         <meta name="description" content="W3BBZ" />
         <meta name="format-detection" content="telephone=no" />
@@ -42,12 +44,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="W3BBZ" />
-        <meta property="og:description" content="Best W3BBZ in the world" />
+        <meta property="og:description" content="W3B + WEEB = W3B.BZ" />
         <meta property="og:site_name" content="W3BBZ" />
         <meta property="og:url" content="https://web.bz" />
         <meta property="og:image" content="https://web.bz/iconx512.png" />
 
-        <link rel="manifest" href={"/manifest.json"} />
+        <link rel="manifest" href="/manifest.json" />
         <title>W3bbz</title>
       </Head>
       <Wagmi>
@@ -57,8 +59,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           <Page>
             <Component {...pageProps} />
           </Page>
+
           <Footer />
-          <SpotifyWidget />
         </StyleProvider>
       </Wagmi>
     </>
