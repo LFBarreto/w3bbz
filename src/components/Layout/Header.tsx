@@ -100,7 +100,9 @@ export default function Header() {
       <Head>
         <meta
           name="theme-color"
-          content={theme === "light" ? "hsl(247, 56%, 68%)" : "hsl(0, 0%, 76%)"}
+          content={
+            theme === "light" ? "hsl(247, 56%, 68%)" : "hsl(120, 80%, 50%)"
+          }
         />
       </Head>
       <ColorBox isOpen={isOpen} />
