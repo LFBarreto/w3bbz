@@ -76,7 +76,7 @@ const MenuContainer = styled(Flex).attrs({
   left: 0;
   width: 100%;
   height: 152px;
-  box-shadow: 0px 5px 0px 0px currentColor;
+  box-shadow: 0px 5px 0px 0px currentColor, 0px -5px 0px 0px currentColor;
 `;
 
 export default function Header() {
