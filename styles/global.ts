@@ -78,6 +78,7 @@ export const GlobalStyle = createGlobalStyle`
 
       --sptfy-filter: invert(1);
       --filter-noise:  url(/images/bg-noise-light.png);
+      -webkit-tap-highlight-color: transparent;
   }
 
   .shift-title {

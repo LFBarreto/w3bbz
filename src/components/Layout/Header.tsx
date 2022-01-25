@@ -56,7 +56,7 @@ const ColorBox = styled(Flex).attrs({
   left: 0;
   width: 100%;
   min-height: 152px;
-  z-index: 0;
+  z-index: 1;
   transform: ${(p) => (p.isOpen ? "translate(0, 152px)" : "none")};
   box-shadow: 0px -5px 0px 0px currentColor;
 
