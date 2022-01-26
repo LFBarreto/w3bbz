@@ -109,7 +109,6 @@ function NFTViewer({
         "mousemove",
         (e: any) => {
           if (isDrawing === true) {
-            console.log(e.offsetX, x, ratioX);
             mouseCircle.setAttribute(
               "style",
               `transform: translate(${x}px, ${y}px); animation:none;`
@@ -117,6 +116,19 @@ function NFTViewer({
             x = e.offsetX * ratioX;
             y = e.offsetY * ratioY;
           }
+        },
+        false
+      );
+
+      b.addEventListener(
+        "touchmove",
+        (e: any) => {
+          mouseCircle.setAttribute(
+            "style",
+            `transform: translate(${x}px, ${y}px); animation:none;`
+          );
+          x = e.offsetX * ratioX;
+          y = e.offsetY * ratioY;
         },
         false
       );
