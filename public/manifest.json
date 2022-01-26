@@ -3,6 +3,7 @@
   "short_name": "W3BBZ",
   "start_url": "/",
   "background_color": "#19e619",
+  "theme_color": "#19e619",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [

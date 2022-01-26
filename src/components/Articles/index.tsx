@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useRouter } from "next/router";
+import NextLink from "next/link";
 import { Flex, Text, Blockquote, Image, Link, Button } from "..";
+import { FlexBoxProps } from "../Layout/Flex";
 
 const ArticleContainer = styled(Flex).attrs<{ reverse?: boolean }>(
   ({ reverse }) => ({
@@ -62,6 +63,7 @@ type Article = {
   blockquote?: string;
   style?: any;
   image?: string;
+  noFilterImage?: boolean;
   children?: React.ReactNode;
   reverse?: boolean;
   hashtags?: string[];
@@ -76,13 +78,12 @@ type ArticlesJSON = {
   data: Article[];
 };
 
-type Props = {
+type Props = FlexBoxProps & {
   articlesJSON: ArticlesJSON;
 };
 
 export default function Articles({ articlesJSON, ...props }: Props) {
   const { title, subTitle, description, data } = articlesJSON;
-  const router = useRouter();
 
   return (
     <Flex
@@ -91,7 +92,6 @@ export default function Articles({ articlesJSON, ...props }: Props) {
       justifyContent="flex-end"
       alignItems="flex-end"
       width="100%"
-      pt={153}
       {...props}
     >
       <ArticleContent flexDirection="column" px={4} pr="3rem" my="3rem">
@@ -127,6 +127,7 @@ export default function Articles({ articlesJSON, ...props }: Props) {
                 alignItems={"flex-end"}
                 src={article.image}
                 alt={article.title}
+                noFilter={article.noFilterImage}
               >
                 {Hashtagz}
               </Image>
@@ -156,15 +157,11 @@ export default function Articles({ articlesJSON, ...props }: Props) {
                 </Link>
               ) : null}
               {article.link ? (
-                <Button
-                  onClick={() =>
-                    article?.link?.href && router.push(article.link.href)
-                  }
-                  whiteSpace="nowrap"
-                  mt={4}
-                >
-                  {article.link.label}
-                </Button>
+                <NextLink href={article?.link?.href}>
+                  <Button whiteSpace="nowrap" mt={4}>
+                    {article.link.label}
+                  </Button>
+                </NextLink>
               ) : null}
 
               {article.children}

@@ -7,6 +7,7 @@ const WidgetContainer = styled(Flex).attrs({
   right: "100%",
   bottom: "10px",
   height: 80,
+  bg: "black",
 })`
   overflow: hidden;
   border-radius: 0 15px 0 0;
@@ -21,13 +22,13 @@ const WidgetContainer = styled(Flex).attrs({
 
 export default function SpotifyWidget() {
   return (
-    <WidgetContainer>
+    <WidgetContainer className="spotify-widget-container">
       <iframe
         src="https://open.spotify.com/embed/playlist/2Dta1TdixfDg0UvumSw7NE?utm_source=generator&theme=0"
         width="100%"
         height="80"
         frameBorder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
       ></iframe>
     </WidgetContainer>
   );

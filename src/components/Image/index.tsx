@@ -8,38 +8,49 @@ export const ImageFilter = css`
   -webkit-filter: grayscale(100%) contrast(100%);
   filter: grayscale(100%) contrast(200%);
   opacity: 1;
-  user-select: none;
-  pointer-events: none;
 `;
 
 const ImageContainer = styled(Flex).attrs({ bg: "primary.c80" })<{
   backgroundSize?: string;
   backgroundPosition?: string;
+  noFilter?: boolean;
 }>`
-  position: 100vmin;
-  min-height: 40vw;
   .inner-img {
     position: relative;
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    ${ImageFilter}
     z-index: 1;
+    ${ImageFilter}
   }
+  ${(p) =>
+    p.noFilter
+      ? `
+    &:hover .inner-img ,.inner-img:hover {
+      filter:none;
+      mix-blend-mode: normal;
+    }
+    `
+      : ""}
 
+  ${(p) =>
+    p.height
+      ? ""
+      : ` min-height: 40vw;
   @media (max-width: 600px) {
     min-height: 100vmin;
-  }
+  }`}
 `;
 
-type Props = FlexBoxProps & {
+export type ImageProps = FlexBoxProps & {
   bg?: string;
   src: string;
   alt?: string;
   backgroundSize?: "cover" | "contain";
   backgroundPosition?: string;
   children?: React.ReactNode;
+  noFilter?: boolean;
 };
 
 export default function Image({
@@ -48,7 +59,7 @@ export default function Image({
   backgroundSize = "cover",
   children,
   ...props
-}: Props) {
+}: ImageProps) {
   return (
     <ImageContainer backgroundSize={backgroundSize} {...props}>
       <div className="inner-img">

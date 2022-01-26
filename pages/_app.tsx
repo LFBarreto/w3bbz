@@ -33,6 +33,37 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="msapplication-config" content="/icons/browserconfig.xml" />
         <meta name="msapplication-tap-highlight" content="no" />
 
+        <link
+          rel="preload"
+          href="/fonts/tinier.regular.woff2"
+          as="font"
+          type="font/woff2"
+        />
+        <link
+          rel="preload"
+          href="/fonts/tiny.regular.woff2"
+          as="font"
+          type="font/woff2"
+        />
+        <link
+          rel="preload"
+          href="/fonts/5by7.bold.woff2"
+          as="font"
+          type="font/woff2"
+        />
+        <link
+          rel="preload"
+          href="/fonts/5by7.regular.woff2"
+          as="font"
+          type="font/woff2"
+        />
+        <link
+          rel="preload"
+          href="/fonts/FuturaLT-Bold.woff2"
+          as="font"
+          type="font/woff2"
+        />
+
         <link rel="apple-touch-icon" href="/iconx72.png" />
         <link rel="apple-touch-icon" sizes="152x152" href="/iconx152.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/iconx180.png" />

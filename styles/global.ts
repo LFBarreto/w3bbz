@@ -6,6 +6,11 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-size: calc(10px + 0.6vw);
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    color-scheme: light dark;
   }
 
   body {
@@ -20,6 +25,17 @@ export const GlobalStyle = createGlobalStyle`
     --p-c90: hsl(120, 90%, 50%);
     --p-c100: hsl(120, 100%, 50%);
 
+    --a-c10: hsl(251, 100%, 99%);
+    --a-c20: hsl(251, 100%, 97%);
+    --a-c30: hsl(249, 100%, 95%);
+    --a-c40: hsl(250, 100%, 91%);
+    --a-c50: hsl(249, 100%, 88%);
+    --a-c60: hsl(248, 100%, 85%);
+    --a-c70: hsl(248, 76%, 79%);
+    --a-c80: hsl(247, 56%, 68%);
+    --a-c90: hsl(247, 40%, 53%);
+    --a-c100: hsl(247, 46%, 42%);
+
     --n-c00: hsl(0, 0%, 0%);
     --n-c20: hsl(0, 0%, 10%);
     --n-c30: hsl(0, 0%, 15%);
@@ -32,6 +48,30 @@ export const GlobalStyle = createGlobalStyle`
     --n-c100: hsl(0, 0%, 100%);
     --n-c100a07: hsl(0, 0%, 100%, 0.7);
 
+    --s-c10: hsl(109, 38%, 11%);
+    --s-c30: hsl(110, 38%, 18%);
+    --s-c40: hsl(109, 37%, 26%);
+    --s-c50: hsl(110, 37%, 34%);
+    --s-c60: hsl(110, 37%, 42%);
+    --s-c80: hsl(110, 38%, 50%);
+    --s-c100: hsl(110, 50%, 57%);
+  
+    --w-c10: hsl(16, 48%, 14%);
+    --w-c30: hsl(17, 49%, 21%);
+    --w-c40: hsl(17, 48%, 31%);
+    --w-c50: hsl(16, 48%, 40%);
+    --w-c60: hsl(17, 48%, 50%);
+    --w-c80: hsl(18, 86%, 64%);
+    --w-c100: hsl(17, 100%, 68%);
+  
+    --e-c10: hsl(0, 50%, 13%);
+    --e-c30: hsl(359, 51%, 20%);
+    --e-c40: hsl(358, 51%, 29%);
+    --e-c50: hsl(359, 51%, 37%);
+    --e-c60: hsl(359, 51%, 46%);
+    --e-c80: hsl(359, 62%, 55%);
+    --e-c100: hsl(359, 84%, 63%);
+    
     --t-contrast: hsl(0,0%,0%);
 
     --main: hsla(0, 0%, 0%, 1);
@@ -45,6 +85,8 @@ export const GlobalStyle = createGlobalStyle`
     background-color: var(--p-c80);
     overflow-x: hidden;
     overflow-y: visible;
+    -webkit-tap-highlight-color: transparent;
+    cursor: url('/cursor.png'), auto;
   }
 
   body.light {
@@ -59,6 +101,17 @@ export const GlobalStyle = createGlobalStyle`
       --p-c80: hsl(247, 56%, 68%);
       --p-c90: hsl(247, 40%, 53%);
       --p-c100: hsl(247, 46%, 42%);
+
+      --a-c10: hsl(120, 10%, 50%);
+      --a-c20: hsl(120, 20%, 50%);
+      --a-c30: hsl(120, 30%, 50%);
+      --a-c40: hsl(120, 40%, 50%);
+      --a-c50: hsl(120, 50%, 50%);
+      --a-c60: hsl(120, 60%, 50%);
+      --a-c70: hsl(120, 70%, 50%);
+      --a-c80: hsl(120, 80%, 50%);
+      --a-c90: hsl(120, 90%, 50%);
+      --a-c100: hsl(120, 100%, 50%);
 
       --t-contrast: hsl(0,0%,0%);
 
@@ -78,7 +131,6 @@ export const GlobalStyle = createGlobalStyle`
 
       --sptfy-filter: invert(1);
       --filter-noise:  url(/images/bg-noise-light.png);
-      -webkit-tap-highlight-color: transparent;
   }
 
   .shift-title {
@@ -156,27 +208,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-family: "Futura-Oblique";
-    src: url("/fonts/FuturaLT-ExtraBoldOblique.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Futura-Regular";
-    src: url("/fonts/FuturaLT-Condensed.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Futura-Thin";
-    src: url("/fonts/FuturaLT-Light.woff2") format("woff2");
-    font-weight: 300;
-    font-style: normal;
-  }
-
-  @font-face {
     font-family: "Dots";
     src: url("/fonts/5by7.regular.woff2") format("woff2");
     font-weight: 500;
@@ -201,7 +232,6 @@ export const GlobalStyle = createGlobalStyle`
     font: inherit;
     color: inherit;
     user-select: inherit;
-    cursor: inherit;
     outline: none;
   }
 

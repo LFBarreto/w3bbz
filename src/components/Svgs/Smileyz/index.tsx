@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-const rotate = keyframes`
+export const rotate = keyframes`
   0% {
     transform: rotate(0deg)
   }
@@ -13,7 +13,7 @@ const rotate = keyframes`
   }
 `;
 
-const Container = styled.svg`
+export const Container = styled.svg`
   width: 100%;
   height: 100%;
   #path828 {

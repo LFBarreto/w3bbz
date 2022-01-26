@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Text, { TextProps } from "../Text";
 import { baseStyles, BaseStyledProps } from "../styled";
-import React from "react";
+import React, { forwardRef } from "react";
 
 export type ButtonProps = BaseStyledProps &
   TextProps &
@@ -13,6 +13,7 @@ export type ButtonProps = BaseStyledProps &
     tabIndex?: number;
     id?: string;
     noInvert?: boolean;
+    title?: string;
   }>;
 
 const Button = styled.button.attrs<ButtonProps, ButtonProps>({
@@ -24,7 +25,6 @@ const Button = styled.button.attrs<ButtonProps, ButtonProps>({
   border: none;
   cursor: pointer;
   font-size: 1em;
-  background-color: transparent;
   min-height: 44px;
   width: min-content;
   ${(p) => p.theme.transition()}
@@ -41,24 +41,28 @@ const Button = styled.button.attrs<ButtonProps, ButtonProps>({
   }
 `;
 
-export default function ButtonComponent({
-  children,
-  tabIndex,
-  fontFamily,
-  fontSize,
-  variant,
-  textAlign,
-  fontWeight,
-  lineHeight,
-  textTransform,
-  textOverflow,
-  uppercase,
-  whiteSpace,
-  color,
-  ...props
-}: ButtonProps) {
-  return (
-    <Button tabIndex={tabIndex} {...props}>
+const ButtonComponent = forwardRef(
+  (
+    {
+      children,
+      tabIndex,
+      fontFamily,
+      fontSize,
+      variant,
+      textAlign,
+      fontWeight,
+      lineHeight,
+      textTransform,
+      textOverflow,
+      uppercase,
+      whiteSpace,
+      color,
+      bg = "transparent",
+      ...props
+    }: ButtonProps,
+    ref
+  ) => (
+    <Button tabIndex={tabIndex} ref={ref} bg={bg} {...props}>
       <Text
         fontFamily={fontFamily}
         fontSize={fontSize}
@@ -75,5 +79,9 @@ export default function ButtonComponent({
         {children}
       </Text>
     </Button>
-  );
-}
+  )
+);
+
+ButtonComponent.displayName = "ButtonComponent";
+
+export default ButtonComponent;

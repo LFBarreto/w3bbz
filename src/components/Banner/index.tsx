@@ -32,7 +32,10 @@ const Banner = styled(Flex).attrs<BannerProps, BannerProps>({
   border: none;
   font-size: 1em;
   min-height: 44px;
-  animation: ${animBanner} 15s linear infinite;
+  ${Text} {
+    line-height: 44px;
+    animation: ${animBanner} 10s linear infinite;
+  }
 `;
 
 export default function BannerComponent({
@@ -46,7 +49,6 @@ export default function BannerComponent({
   textTransform,
   textOverflow,
   uppercase,
-  whiteSpace,
   ...props
 }: BannerProps) {
   const [size, setSize] = useState(0);
@@ -61,7 +63,7 @@ export default function BannerComponent({
       typeof ref.current?.getBoundingClientRect === "function"
     ) {
       const { width: elWidth } = ref.current.getBoundingClientRect();
-      setSize(Math.ceil((width * 2) / elWidth) + 1);
+      setSize(Math.ceil(width / elWidth) + 2);
       setReady(true);
     }
   }, [ref, width]);
@@ -79,7 +81,7 @@ export default function BannerComponent({
         textTransform={textTransform}
         textOverflow={textOverflow}
         uppercase={uppercase}
-        whiteSpace={whiteSpace}
+        whiteSpace="nowrap"
         px={8}
         color="textContrast"
       >
@@ -100,7 +102,7 @@ export default function BannerComponent({
               textTransform={textTransform}
               textOverflow={textOverflow}
               uppercase={uppercase}
-              whiteSpace={whiteSpace}
+              whiteSpace="nowrap"
               px={8}
               color="textContrast"
             >

@@ -15,7 +15,7 @@ const SmileyContainer = styled(Flex).attrs({
 
 export default function SmileyContainerComponent() {
   return (
-    <SmileyContainer>
+    <SmileyContainer id="smiley-container">
       <Smileys />
     </SmileyContainer>
   );

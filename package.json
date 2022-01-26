@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/styled-system": "^5.1.15",
     "ethers": "^5.5.3",
+    "lodash": "^4.17.21",
     "modern-normalize": "^1.1.0",
     "next": "12.0.8",
     "next-i18next": "^10.2.0",
@@ -24,6 +25,7 @@
     "wagmi": "^0.2.0"
   },
   "devDependencies": {
+    "@types/react-dom": "^17.0.11",
     "@types/styled-components": "^5.1.20",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "eslint": "^8.7.0",

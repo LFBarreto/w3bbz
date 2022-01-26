@@ -8,10 +8,9 @@ const Container = styled(Flex).attrs({
   justifyContent: "flex-start",
   flex: 1,
   bg: "background.main",
-})`
-  flex: 1 0 calc(100% - calc(132px + 2vw));
-`;
+  pt: 150,
+})``;
 
-export default function Page({ children }: { children: React.ReactNode }) {
+export default function InnerPage({ children }: { children: React.ReactNode }) {
   return <Container>{children}</Container>;
 }

@@ -31,6 +31,10 @@ export default function About() {
               currently arround NFT and generative art..
               `,
               image: "/images/weeb.gif",
+              href: {
+                href: "https://github.com/LFBarreto/w3bbz",
+                label: "Check my code",
+              },
               reverse: true,
             },
             {

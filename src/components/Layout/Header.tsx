@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Head from "next/head";
 import Flex from "./Flex";
-import Text from "../Text";
 import Button from "../Button";
 import { useTranslation } from "react-i18next";
 import { useLocalStorage } from "react-use";
@@ -80,7 +80,7 @@ const MenuContainer = styled(Flex).attrs({
 `;
 
 export default function Header() {
-  const [theme, setTheme] = useLocalStorage("theme", "light");
+  const [theme, setTheme] = useLocalStorage("theme", "");
   const { t } = useTranslation("nav");
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
@@ -92,9 +92,39 @@ export default function Header() {
   }, [theme, setTheme]);
 
   useEffect(() => {
+    const onPreferenceChange = (e: { matches: boolean }) => {
+      setTheme(e.matches ? "dark" : "light");
+    };
+    if (window.matchMedia) {
+      //sombre
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        setTheme("dark");
+      }
+
+      //clair
+      if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        setTheme("light");
+      }
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", onPreferenceChange);
+    }
+    return () => {
+      if (window.matchMedia) {
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .removeEventListener("change", onPreferenceChange);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     document.body.className = theme || "";
   }, [theme]);
 
+  const scrollToTop = useCallback(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Head>
@@ -118,33 +148,36 @@ export default function Header() {
           >
             {theme === "light" ? "🌝" : "🌚"}
           </Button>
-          <Button
-            variant="h5"
-            onClick={() => router.push("/")}
-            tabIndex={isOpen ? 0 : -1}
-            color="textContrast"
-          >
-            {router.asPath == "/" ? ">>>" : ""}
-            {t("home")}
-          </Button>
-          <Button
-            variant="h5"
-            onClick={() => router.push("/nft")}
-            tabIndex={isOpen ? 0 : -1}
-            color="textContrast"
-          >
-            {router.asPath == "/nft" ? ">>>" : undefined}
-            {t("nft")}
-          </Button>
-          <Button
-            variant="h5"
-            onClick={() => router.push("/about")}
-            tabIndex={isOpen ? 0 : -1}
-            color="textContrast"
-          >
-            {router.asPath == "/about" ? ">>>" : undefined}
-            {t("about")}
-          </Button>
+          <Link href="/">
+            <Button
+              variant="h5"
+              tabIndex={isOpen ? 0 : -1}
+              color="textContrast"
+            >
+              {router.asPath == "/" ? ">>>" : ""}
+              {t("home")}
+            </Button>
+          </Link>
+          <Link href="/nft">
+            <Button
+              variant="h5"
+              tabIndex={isOpen ? 0 : -1}
+              color="textContrast"
+            >
+              {router.asPath == "/nft" ? ">>>" : undefined}
+              {t("nft")}
+            </Button>
+          </Link>
+          <Link href="/about">
+            <Button
+              variant="h5"
+              tabIndex={isOpen ? 0 : -1}
+              color="textContrast"
+            >
+              {router.asPath == "/about" ? ">>>" : undefined}
+              {t("about")}
+            </Button>
+          </Link>
         </MenuContainer>
         <Flex
           flexDirection="row"
@@ -153,9 +186,15 @@ export default function Header() {
           width="100%"
           height="75px"
         >
-          <Text id="title" variant="h1">
+          <Button
+            id="title"
+            variant="h1"
+            title="scroll to top"
+            onClick={scrollToTop}
+            noInvert
+          >
             W3BBZ
-          </Text>
+          </Button>
 
           <Button id="toggleButton" onClick={toggle} variant="h5">
             {isOpen ? "<<<" : ">>>"}

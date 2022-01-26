@@ -8,6 +8,7 @@ export default function NftHome() {
         <title>W3BBZ - NFT</title>
       </Head>
       <Articles
+        pt={153}
         articlesJSON={{
           title: "NFT",
           subTitle: "May i show you my cool projects?",
@@ -15,14 +16,32 @@ export default function NftHome() {
           No JPEGs allowed!
           `,
           data: [
-            /** {
+            {
               id: "nft-blobz-01",
               title: "Blobz-Blockz",
               subTitle: "Generative blobz on the blockchain",
-              content: "",
-              link: { href: "/nft/blobz", label: ">>> learn more" },
-              hashtags: ["artz", "math", "solidity", "svg"],
-            },**/
+              content: `A series of 512 blobz fully generated on chain.
+              Inspired by mathmos©️ lava lamps space-age designs and yaoi kusama ❤️
+
+              This is the most technically advanced project i did so far, mixing
+              pseudo random svg path generation using trigonometry on solidity,
+              shapes merging through blur and compositing on alpha channels, and
+              theme interpolations.
+
+              Whait what? you didn't understand what i just said?
+
+              No worries me neither!
+              Just check the collection and mint some!
+
+              `,
+              image: "/images/blobz-banner.svg",
+              noFilterImage: true,
+              link: {
+                href: "/nft/blobbz",
+                label: ">>> view collection",
+              },
+              hashtags: ["artz", "solidity", "svg"],
+            },
             {
               id: "nft-t3t99-01",
               title: "Tetris 99 Token",
@@ -59,6 +78,7 @@ export default function NftHome() {
               a trace of the last transfer on the image itself.
               `,
               image: "/images/space-invader.gif",
+              noFilterImage: true,
               href: {
                 href: "https://opensea.io/collection/spi-t",
                 label: "view on opensea",
