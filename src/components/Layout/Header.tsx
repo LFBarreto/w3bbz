@@ -81,7 +81,12 @@ const MenuContainer = styled(Flex).attrs({
 
 export default function Header() {
   const [theme, setTheme] = useLocalStorage("theme", "");
+  const [prefferedTheme, setPreferedTheme] = useLocalStorage(
+    "prefered-theme",
+    ""
+  );
   const { t } = useTranslation("nav");
+  const definedTheme = theme || prefferedTheme;
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -93,17 +98,17 @@ export default function Header() {
 
   useEffect(() => {
     const onPreferenceChange = (e: { matches: boolean }) => {
-      setTheme(e.matches ? "dark" : "light");
+      setPreferedTheme(e.matches ? "dark" : "light");
     };
     if (window.matchMedia) {
       //sombre
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setTheme("dark");
+        setPreferedTheme("dark");
       }
 
       //clair
       if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-        setTheme("light");
+        setPreferedTheme("light");
       }
       window
         .matchMedia("(prefers-color-scheme: dark)")
@@ -116,22 +121,25 @@ export default function Header() {
           .removeEventListener("change", onPreferenceChange);
       }
     };
-  }, []);
+  }, [setPreferedTheme]);
 
   useEffect(() => {
-    document.body.className = theme || "";
-  }, [theme]);
+    document.body.className = definedTheme || "";
+  }, [definedTheme]);
 
   const scrollToTop = useCallback(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
       <Head>
         <meta
           name="theme-color"
           content={
-            theme === "light" ? "hsl(247, 56%, 68%)" : "hsl(120, 80%, 50%)"
+            definedTheme === "light"
+              ? "hsl(247, 56%, 68%)"
+              : "hsl(120, 80%, 50%)"
           }
         />
       </Head>
@@ -146,7 +154,7 @@ export default function Header() {
             lineHeight="44px"
             noInvert
           >
-            {theme === "light" ? "🌝" : "🌚"}
+            {definedTheme === "light" ? "🌝" : "🌚"}
           </Button>
           <Link href="/">
             <Button
