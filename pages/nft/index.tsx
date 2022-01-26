@@ -6,14 +6,24 @@ export default function NftHome() {
     <>
       <Head>
         <title>W3BBZ - NFT</title>
+        <meta
+          property="og:description"
+          content="W3B.BZ NFT - May i show you my cool nft projects?"
+        />
+        <meta property="og:site_name" content="W3BBZ" />
+        <meta property="og:url" content="https://web.bz/nft" />
+        <meta property="og:image" content="/images/blobz-banner.svg" />
       </Head>
       <Articles
         pt={153}
         articlesJSON={{
           title: "NFT",
-          subTitle: "May i show you my cool projects?",
+          subTitle: "May i show you my cool nft projects?",
           description: `
-          No JPEGs allowed!
+          Here you'll find my latest NFT projects using Solidity on the Polygon network.
+          All my NFTs are fully on chain using programmatic SVG.
+
+          Hope you enjoy them and feel free to mint some 
           `,
           data: [
             {

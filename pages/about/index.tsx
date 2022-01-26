@@ -6,6 +6,12 @@ export default function About() {
     <>
       <Head>
         <title>W3BBZ - About</title>
+        <meta
+          property="og:description"
+          content="W3B.BZ About - Where am i? What is this? Why did i step on this unholy land?"
+        />
+        <meta property="og:site_name" content="W3BBZ" />
+        <meta property="og:url" content="https://web.bz/about" />
       </Head>
       <Articles
         articlesJSON={{

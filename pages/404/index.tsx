@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Flex, Text, ImageFilter } from "../../src/components";
 import styled from "styled-components";
 
@@ -18,26 +19,35 @@ const NotFoundImage = styled(Flex).attrs({
 
 export default function Page404() {
   return (
-    <Flex
-      flexDirection="column"
-      flex="1"
-      alignItems="center"
-      justifyContent="center"
-      position="relative"
-      bg="primary.c80"
-    >
-      <NotFoundImage />
-      <Text
-        variant="h1"
-        textAlign="center"
-        width="100%"
-        fontSize={"30vw"}
-        style={{ mixBlendMode: "multiply" }}
-        color="primary.c80"
-        zIndex={1}
+    <>
+      <Head>
+        <title>W3BBZ - 404</title>
+        <meta property="og:description" content="W3B.BZ 404 - Where am i?" />
+        <meta property="og:site_name" content="W3BBZ" />
+        <meta property="og:url" content="https://web.bz/about" />
+        <meta property="og:image" content="/images/404.gif" />
+      </Head>
+      <Flex
+        flexDirection="column"
+        flex="1"
+        alignItems="center"
+        justifyContent="center"
+        position="relative"
+        bg="primary.c80"
       >
-        404
-      </Text>
-    </Flex>
+        <NotFoundImage />
+        <Text
+          variant="h1"
+          textAlign="center"
+          width="100%"
+          fontSize={"30vw"}
+          style={{ mixBlendMode: "multiply" }}
+          color="primary.c80"
+          zIndex={1}
+        >
+          404
+        </Text>
+      </Flex>
+    </>
   );
 }

@@ -123,12 +123,16 @@ function NFTViewer({
       b.addEventListener(
         "touchmove",
         (e: any) => {
-          mouseCircle.setAttribute(
-            "style",
-            `transform: translate(${x}px, ${y}px); animation:none;`
-          );
-          x = e.offsetX * ratioX;
-          y = e.offsetY * ratioY;
+          const { changedTouches } = e;
+          if (changedTouches && changedTouches[0]) {
+            const { clientX, clientY } = changedTouches[0];
+            mouseCircle.setAttribute(
+              "style",
+              `transform: translate(${x}px, ${y}px); animation:none;`
+            );
+            x = clientX * ratioX;
+            y = clientY * ratioY;
+          }
         },
         false
       );
