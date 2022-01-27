@@ -11,8 +11,11 @@ export default function NftHome() {
           content="W3B.BZ NFT - May i show you my cool nft projects?"
         />
         <meta property="og:site_name" content="W3BBZ" />
-        <meta property="og:url" content="https://web.bz/nft" />
-        <meta property="og:image" content="/images/blobz-banner.svg" />
+        <meta property="og:url" content="https://w3b.bz/nft" />
+        <meta
+          property="og:image"
+          content="https://w3b.bz/images/blobz-banner.svg"
+        />
       </Head>
       <Articles
         pt={153}

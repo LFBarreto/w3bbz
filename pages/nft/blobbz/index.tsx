@@ -16,8 +16,8 @@ export default function BlobzHome() {
           name="description"
           content="W3BBZ - BlobzBlockz A series of 512 blobz fully generated on chain. Inspired by lava lamps and their inhate randomness (ie: cloudflare lava lamps RNG) This series explores generative art on polygon using solidity. Each NFT is unique in shape size animations and mix of colors."
         />
-        <meta property="og:url" content="https://web.bz/nft/blobbz" />
-        <meta property="og:image" content="https://web.bz/images/blobzzz.png" />
+        <meta property="og:url" content="https://w3b.bz/nft/blobbz" />
+        <meta property="og:image" content="https://w3b.bz/images/blobzzz.png" />
         <style>
           {
             "#smiley-container { display: none; } .spotify-widget-container{ z-index: 5!important; }"
