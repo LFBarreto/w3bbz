@@ -75,10 +75,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="W3BBZ" />
-        <meta property="og:description" content="W3B + WEEB = W3B.BZ" />
-        <meta property="og:site_name" content="W3BBZ" />
-        <meta property="og:url" content="https://web.bz" />
-        <meta property="og:image" content="https://web.bz/iconx512.png" />
 
         <link rel="manifest" href="/manifest.json" />
         <title>W3bbz</title>

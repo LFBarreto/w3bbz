@@ -12,6 +12,7 @@ export default function About() {
         />
         <meta property="og:site_name" content="W3BBZ" />
         <meta property="og:url" content="https://web.bz/about" />
+        <meta property="og:image" content="/iconx512.png" />
       </Head>
       <Articles
         articlesJSON={{

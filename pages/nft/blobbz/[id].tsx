@@ -20,7 +20,7 @@ export default function BlobzHome() {
           content={`W3BBZ - #${id} BlobzBlockz A series of 512 blobz fully generated on chain. Inspired by lava lamps and their inhate randomness (ie: cloudflare lava lamps RNG) This series explores generative art on polygon using solidity. Each NFT is unique in shape size animations and mix of colors.`}
         />
         <meta property="og:url" content={`https://web.bz/nft/blobbz/${id}`} />
-        <meta property="og:image" content="images/blobzzz.png" />
+        <meta property="og:image" content="/images/blobzzz.png" />
       </Head>
       {blobzContract && abi ? (
         <NFTViewer contract={blobzContract} abi={abi} tokenId={Number(id)} />
