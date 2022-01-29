@@ -1,19 +1,9 @@
 import ReactDOM from "react-dom";
 import React, { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
-import styled from "styled-components";
 import { useContract, erc721ABI, useContractEvent, useSigner } from "wagmi";
-import { Flex, Banner, SvgMintButton } from "../";
+import { Flex, Banner, SvgMintButton, BannerContainer } from "../";
 import { useRouter } from "next/router";
-
-const BannerContainer = styled(Flex).attrs<{ bg?: string }>((p) => ({
-  flexDirection: "column",
-  width: "100%",
-  bg: p.bg || "primary.c80",
-}))`
-  background-image: var(--filter-noise);
-  background-repeat: repeat;
-`;
 
 const ActiveMintButton = ({
   contract,

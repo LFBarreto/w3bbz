@@ -13,6 +13,7 @@ export { default as Wagmi } from "./WagmiPage";
 export { default as Button } from "./Button";
 export { default as Link } from "./Link";
 export { default as Banner } from "./Banner";
+export { default as BannerContainer } from "./Banner/BannerContainer";
 export { default as TopBanner } from "./TopBanner";
 export { default as Blobz } from "./Svgs/Blobz";
 export { default as Smileyz } from "./Svgs/Smileyz";

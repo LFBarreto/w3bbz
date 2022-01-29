@@ -128,6 +128,24 @@ module.exports = [
   {
     urlPattern: ({ url }) => {
       const isSameOrigin = self.origin === url.origin;
+      if (!isSameOrigin) return false;
+      const pathname = url.pathname;
+      console.log("SW", pathname, isSameOrigin);
+      if (pathname.startsWith("/api/blobbz")) return true;
+      return false;
+    },
+    handler: "CacheFirst",
+    options: {
+      cacheName: "blobz-cache",
+      expiration: {
+        maxEntries: 512,
+        maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+      },
+    },
+  },
+  {
+    urlPattern: ({ url }) => {
+      const isSameOrigin = self.origin === url.origin;
       return !isSameOrigin;
     },
     handler: "NetworkFirst",
@@ -138,18 +156,6 @@ module.exports = [
         maxAgeSeconds: 60 * 60, // 1 hour
       },
       networkTimeoutSeconds: 10,
-    },
-  },
-  {
-    urlPattern: /^https:\/\/polygon-mainnet\.infura\.io\/v3\/*/,
-    handler: "CacheFirst",
-    method: "POST",
-    options: {
-      cacheName: "infura-api",
-      expiration: {
-        maxEntries: 25,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
     },
   },
 ];

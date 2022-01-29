@@ -25,7 +25,7 @@ export default function Page404() {
         <meta property="og:description" content="W3B.BZ 404 - Where am i?" />
         <meta property="og:site_name" content="W3BBZ" />
         <meta property="og:url" content="https://w3b.bz/about" />
-        <meta property="og:image" content="https://w3b.bz/images/404.gif" />
+        <meta property="og:image" content="/images/404.gif" />
       </Head>
       <Flex
         flexDirection="column"

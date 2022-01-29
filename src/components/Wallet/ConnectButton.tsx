@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useConnect, useAccount, useNetwork } from "wagmi";
-import { Flex, Button, Banner, MintButton } from "../";
+import { Flex, Button, Banner, MintButton, BannerContainer } from "../";
 
 const Container = styled(Flex).attrs({
   flexDirection: "column",
@@ -17,15 +17,6 @@ const Container = styled(Flex).attrs({
 })`
   min-height: 132px;
   height: auto;
-`;
-
-const BannerContainer = styled(Flex).attrs<{ bg?: string }>((p) => ({
-  flexDirection: "column",
-  width: "100%",
-  bg: p.bg || "primary.c80",
-}))`
-  background-image: var(--filter-noise);
-  background-repeat: repeat;
 `;
 
 type ConnectButtonProps = {
