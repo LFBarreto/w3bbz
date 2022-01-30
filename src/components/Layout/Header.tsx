@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, memo } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -24,43 +24,27 @@ const Container = styled(Flex).attrs({
   box-sizing: border-box;
   min-height: 123px;
   flex-direction: column;
-  z-index: 4;
+  z-index: 4000;
   transform: ${(p) => (p.isOpen ? "translate(0, 152px)" : "none")};
   ${(p) => p.theme.transition(["transform"])}
+  will-change: transform;
 
-  #toggleButton {
+  .toggleButton {
+    height: 44px;
+    width: 44px;
+    padding-left: 7px;
     transform: rotate(90deg);
-    text-shadow: 0.3rem 0px ${(p) => p.theme.colors.neutral.c00},
-      0.35rem 0px ${(p) => p.theme.colors.neutral.c00};
   }
   #toggleThemeButton {
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
   }
-  #title {
-    padding-top: 0.5rem;
-    line-height: 44px;
+  .title {
+    height: 44px;
     text-shadow: 0.95rem 0px ${(p) => p.theme.colors.primary.c80},
       1.05rem 0px ${(p) => p.theme.colors.primary.c80};
   }
-`;
-
-const ColorBox = styled(Flex).attrs({
-  bg: "primary.c80",
-  color: "primary.c80",
-  flex: 1,
-})<{ isOpen?: boolean }>`
-  position: sticky;
-  top: -174px;
-  left: 0;
-  width: 100%;
-  min-height: 152px;
-  z-index: 1;
-  transform: ${(p) => (p.isOpen ? "translate(0, 152px)" : "none")};
-  box-shadow: 0px -5px 0px 0px currentColor;
-
-  ${(p) => p.theme.transition(["transform"])}
 `;
 
 const MenuContainer = styled(Flex).attrs({
@@ -79,7 +63,7 @@ const MenuContainer = styled(Flex).attrs({
   box-shadow: 0px 5px 0px 0px currentColor, 0px -5px 0px 0px currentColor;
 `;
 
-export default function Header() {
+function Header() {
   const [theme, setTheme] = useLocalStorage("theme", "");
   const [prefferedTheme, setPreferedTheme] = useLocalStorage(
     "prefered-theme",
@@ -129,7 +113,8 @@ export default function Header() {
 
   const scrollToTop = useCallback(() => {
     window.scrollTo(0, 0);
-  }, []);
+    toggle();
+  }, [toggle]);
 
   return (
     <>
@@ -143,7 +128,6 @@ export default function Header() {
           }
         />
       </Head>
-      <ColorBox isOpen={isOpen} />
       <Container isOpen={isOpen}>
         <MenuContainer>
           <Button
@@ -190,12 +174,13 @@ export default function Header() {
         <Flex
           flexDirection="row"
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent="flex-start"
           width="100%"
           height="75px"
+          pr={4}
         >
           <Button
-            id="title"
+            className="title"
             variant="h1"
             title="scroll to top"
             onClick={scrollToTop}
@@ -203,12 +188,22 @@ export default function Header() {
           >
             W3BBZ
           </Button>
-
-          <Button id="toggleButton" onClick={toggle} variant="h5">
-            {isOpen ? "<<<" : ">>>"}
+          <Flex flex="1" />
+          <Button
+            className="toggleButton"
+            noInvert
+            onClick={toggle}
+            variant="h2"
+            justifyContent="center"
+            alignItems="center"
+            textAlign="center"
+          >
+            {isOpen ? "X" : "||"}
           </Button>
         </Flex>
       </Container>
     </>
   );
 }
+
+export default memo(Header);

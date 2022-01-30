@@ -1,4 +1,5 @@
 export { default as Flex } from "./Layout/Flex";
+export { default as Grid } from "./Layout/Grid";
 export { default as Header } from "./Layout/Header";
 export { default as Footer } from "./Layout/Footer";
 export { default as SmileyContainer } from "./Layout/SmileyContainer";
@@ -21,3 +22,4 @@ export { default as SvgMintButton } from "./Svgs/SvgMintButton";
 export { default as ConnectButton } from "./Wallet/ConnectButton";
 export { default as MintButton } from "./Wallet/MintButton";
 export { default as NFTViewer } from "./NFTViewer";
+export { default as QRCode } from "./QRCode";

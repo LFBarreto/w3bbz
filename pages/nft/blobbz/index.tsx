@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ConnectButton, TopBanner, Articles } from "../../../src/components";
+import { ConnectButton, Articles } from "../../../src/components";
 
 import abi from "./abi-blobz.json";
 
@@ -24,14 +24,7 @@ export default function BlobzHome() {
           }
         </style>
       </Head>
-      <TopBanner src="/images/blobz-banner.png" />
-      <ConnectButton
-        contract={blobzContract}
-        abi={abi}
-        name="BLOBZBLOCKZ"
-        redirectRoute="/nft/blobbz/"
-        bgImage="/images/blobzzzz.png"
-      />
+
       <Articles
         articlesJSON={{
           data: [
@@ -55,8 +48,14 @@ export default function BlobzHome() {
               image: "/images/lava-lamps.jpg",
               href: {
                 href: "https://github.com/LFBarreto/mamie-fait-des-nft/blob/main/contracts/libraries/SVGBlob.sol",
-                label: ">>> checkout the code",
+                label: "checkout the code",
               },
+              link: [
+                {
+                  href: "/nft/blobbz/collection",
+                  label: ">>> view collection",
+                },
+              ],
             },
             {
               id: "blockz-blockz-2",
@@ -67,7 +66,7 @@ export default function BlobzHome() {
               The mix between the random shapes and the random positions makes it so that the animations that arent randomized apear to be.
               However animation timings are overlapped and are set during the minting process making so that the total animation loop has an average duration of arroung 30mins.
 
-              This work is heavily inspired by lava lamps and abtract artists such as yaoi kusama 
+              This work is heavily inspired by lava lamps and abtract artists such as yayoi kusama 
               (theres even a subtheme thats a direct reference in colors and shape to her pumpkin series).
 
               Feel free to check out the whole collection on opensea or mint one here!
@@ -75,11 +74,18 @@ export default function BlobzHome() {
               image: "/images/yaoi-kusama.jpg",
               href: {
                 href: "https://opensea.io/collection/blobz-blockz",
-                label: ">>> View on opensea",
+                label: "View on opensea",
               },
             },
           ],
         }}
+      />
+      <ConnectButton
+        contract={blobzContract}
+        abi={abi}
+        name="BLOBZBLOCKZ"
+        redirectRoute="/nft/blobbz/"
+        bgImage="/images/blobzzzz.png"
       />
     </>
   );

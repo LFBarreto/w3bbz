@@ -33,6 +33,9 @@ export type BaseStyledProps = SpaceProps &
      */
     rowGap?: string | number;
     color?: string;
+    overflow?: string;
+    className?: string;
+    id?: string;
   };
 
 export const baseStyles: InterpolationFunction<unknown> = compose(

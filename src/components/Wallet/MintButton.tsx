@@ -62,8 +62,12 @@ const ActiveMintButton = ({
       contractInterface &&
       contractInterface.REMAINING_SUPPLY
     ) {
-      const remainingSupply = await contractInterface.REMAINING_SUPPLY();
-      setSupply(remainingSupply.toNumber());
+      try {
+        const remainingSupply = await contractInterface.REMAINING_SUPPLY();
+        setSupply(remainingSupply.toNumber());
+      } catch (e) {
+        console.error(e);
+      }
     }
   }, [contractInterface, supply]);
 

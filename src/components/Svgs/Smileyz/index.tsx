@@ -16,6 +16,9 @@ export const rotate = keyframes`
 export const Container = styled.svg`
   width: 100%;
   height: 100%;
+  * {
+    will-change: transform;
+  }
   #path828 {
     fill: var(--n-c100);
     fill-opacity: 1;
@@ -34,7 +37,6 @@ export const Container = styled.svg`
   #path828 {
     transform-origin: 50% 50%;
     animation: ${rotate} 12s linear infinite;
-    will-change: transform;
   }
 
   .RR {

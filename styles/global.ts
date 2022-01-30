@@ -153,7 +153,7 @@ export const GlobalStyle = createGlobalStyle`
 
     /* width */
   ::-webkit-scrollbar {
-    width: ${(p) => p.theme.space[2]}px;
+    width: 4px;
   }
 
   /* Track */
@@ -163,12 +163,12 @@ export const GlobalStyle = createGlobalStyle`
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: ${(p) => p.theme.colors.primary.c80};
+    background: var(--p-c80);
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: ${(p) => p.theme.colors.primary.c100};
+    background: var(--p-c100);
   }
 
   ::-webkit-scrollbar-corner {
@@ -181,9 +181,8 @@ export const GlobalStyle = createGlobalStyle`
   :-webkit-autofill:hover, 
   :-webkit-autofill:focus, 
   :-webkit-autofill:active{
-      -webkit-box-shadow: 0 0 0 30px ${(p) =>
-    p.theme.colors.background.main} inset !important;
-      -webkit-text-fill-color: ${(p) => p.theme.colors.primary.c100} !important;
+      -webkit-box-shadow: 0 0 0 30px var(--main) inset !important;
+      -webkit-text-fill-color: var(--p-c100) !important;
   }
 
   @font-face {
@@ -236,8 +235,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background: ${(p) => p.theme.colors.primary.c80};
-    color: ${(p) => p.theme.colors.neutral.c100};
+    background: var(--p-c80);
+    color: var(--n-c100);
   }
 
   --track-color: rgba(0,0,0,0);

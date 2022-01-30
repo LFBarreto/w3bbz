@@ -1,52 +1,56 @@
 import React, { useEffect, useMemo, useRef } from "react";
 
-const JSON_PREFIX = "data:application/json;base64,";
-const SVG_PREFIX = "data:image/svg+xml;base64,";
-
 function NFTViewer({
-  data,
+  metadata,
   extraIframeHTML,
   insertionCallback,
+  onIframeClick,
+  ...props
 }: {
-  data: string;
+  metadata: { image: string };
   extraIframeHTML?: string;
   insertionCallback?: (ref: any) => void;
+  onIframeClick?: () => void;
 }) {
   const ref = useRef<HTMLIFrameElement | undefined>();
-
-  const metadata = useMemo(() => {
-    if (!data || typeof data !== "string") return null;
-
-    return JSON.parse(atob(data.replace(JSON_PREFIX, "")));
-  }, [data]);
 
   const svgData = useMemo(() => {
     if (!metadata) return null;
 
-    return atob(metadata.image.replace(SVG_PREFIX, ""));
+    return metadata.image;
   }, [metadata]);
 
   useEffect(() => {
     if (ref && ref.current && !!svgData) {
       if (ref.current?.contentDocument?.body) {
-        ref.current.contentDocument.body.innerHTML = `${extraIframeHTML}<div id="inner-iframe">${svgData}</div>`;
+        ref.current.contentDocument.body.innerHTML = `<style>html, body { margin: 0; padding: 0; overflow:hidden; height: 100%; width: 100%;}#inner-iframe, svg { width: 100%; height: 100%}</style>${
+          extraIframeHTML || ""
+        }<div id="inner-iframe">${svgData}</div>`;
 
         if (insertionCallback) setTimeout(() => insertionCallback(ref), 500);
+
+        if (onIframeClick) {
+          setTimeout(() => {
+            if (!ref || !ref.current || !ref.current.contentDocument)
+              return null;
+            const innerDoc = ref.current.contentDocument;
+            innerDoc.onclick = onIframeClick;
+          }, 50);
+        }
       }
     }
-  }, [ref, insertionCallback, svgData, extraIframeHTML]);
+  }, [ref, insertionCallback, svgData, extraIframeHTML, onIframeClick]);
 
   return (
-    <>
-      <iframe
-        style={{ border: "none" }}
-        sandbox="allow-scripts allow-same-origin"
-        // @ts-expect-error legacy ref
-        ref={ref}
-        width="100%"
-        height="100%"
-      />
-    </>
+    <iframe
+      {...props}
+      style={{ border: "none" }}
+      sandbox="allow-scripts allow-same-origin"
+      // @ts-expect-error legacy ref
+      ref={ref}
+      width="100%"
+      height="100%"
+    />
   );
 }
 

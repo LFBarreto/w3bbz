@@ -14,6 +14,7 @@ export type ButtonProps = BaseStyledProps &
     id?: string;
     noInvert?: boolean;
     title?: string;
+    className?: string;
   }>;
 
 const Button = styled.button.attrs<ButtonProps, ButtonProps>({
@@ -27,8 +28,11 @@ const Button = styled.button.attrs<ButtonProps, ButtonProps>({
   font-size: 1em;
   min-height: 44px;
   width: min-content;
-  ${(p) => p.theme.transition()}
-  &:focus, &focus-within, &focus-visible {
+  ${(p) => p.theme.transition()};
+  will-change: filter;
+  &:focus,
+  &focus-within,
+  &focus-visible {
     ${(p) =>
       p.noInvert
         ? `
@@ -75,6 +79,7 @@ const ButtonComponent = forwardRef(
         uppercase={uppercase}
         whiteSpace={whiteSpace}
         color={color}
+        width="100%"
       >
         {children}
       </Text>

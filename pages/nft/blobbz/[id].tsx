@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import useSWR from "swr";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { NFTViewer, Banner, BannerContainer } from "../../../src/components";
+import {
+  NFTViewer,
+  Banner,
+  BannerContainer,
+  QRCode,
+  Flex,
+  Link,
+  Text,
+} from "../../../src/components";
 
-const extraIframeHTML = `<style> html, body { margin: 0; padding: 0; overflow:hidden; height: 100%; width: 100%;} @keyframes fadeInWow { 0% {transform: scale(0) translate(300px, 300px)} to {transform: scale(1) translate(300px, 300px)}} #mouse-circle-wow{ will-change: transform; transform: scale(0) translate(300px, 300px); animation: fadeInWow 0.5s ease-out forwards; }#inner-iframe, svg { width: 100%; height: 100%}</style>`;
+const extraIframeHTML = `<style>@keyframes fadeInWow { 0% {transform: scale(0) translate(300px, 300px)} to {transform: scale(1) translate(300px, 300px)}} #mouse-circle-wow{ will-change: transform; transform: scale(0) translate(300px, 300px); animation: fadeInWow 0.5s ease-out forwards; }</style>`;
 
 const insertionCallback = (ref: any) => {
   if (!ref || !ref.current || !ref.current.contentDocument) return null;
@@ -34,12 +42,19 @@ const insertionCallback = (ref: any) => {
     const { width, height } = b.getBoundingClientRect();
     let ratioX = 600 / width;
     let ratioY = 600 / height;
+    let isHeightBigger = height > width;
+    let minmax = isHeightBigger ? height : width;
+
+    let offsetMax = (minmax - 600) / 2;
+    let demiOffset = offsetMax / 2;
+    const getRatio = (t: number, isX: boolean) =>
+      isX !== isHeightBigger ? -demiOffset + (t * (600 + offsetMax)) / 600 : t;
 
     b.addEventListener(
       "mousedown",
       (e: any) => {
-        x = e.offsetX * ratioX;
-        y = e.offsetY * ratioY;
+        x = getRatio(e.offsetX * ratioX, true);
+        y = getRatio(e.offsetY * ratioY, false);
         isDrawing = true;
       },
       false
@@ -53,8 +68,8 @@ const insertionCallback = (ref: any) => {
             "style",
             `transform: translate(${x}px, ${y}px); animation:none;`
           );
-          x = e.offsetX * ratioX;
-          y = e.offsetY * ratioY;
+          x = getRatio(e.offsetX * ratioX, true);
+          y = getRatio(e.offsetY * ratioY, false);
         }
       },
       false
@@ -70,8 +85,8 @@ const insertionCallback = (ref: any) => {
             "style",
             `transform: translate(${x}px, ${y}px); animation:none;`
           );
-          x = clientX * ratioX;
-          y = clientY * ratioY;
+          x = getRatio(clientX * ratioX, true);
+          y = getRatio(clientY * ratioY, false);
         }
       },
       false
@@ -101,6 +116,10 @@ const insertionCallback = (ref: any) => {
               const { width, height } = b.getBoundingClientRect();
               ratioX = 600 / width;
               ratioY = 600 / height;
+              isHeightBigger = height > width;
+              minmax = isHeightBigger ? height : width;
+              offsetMax = (minmax - 600) / 2;
+              demiOffset = offsetMax / 2;
             })
             .catch((err: { message: string; name: string }) => {
               console.error(
@@ -112,6 +131,10 @@ const insertionCallback = (ref: any) => {
             const { width, height } = b.getBoundingClientRect();
             ratioX = 600 / width;
             ratioY = 600 / height;
+            isHeightBigger = height > width;
+            minmax = isHeightBigger ? height : width;
+            offsetMax = (minmax - 600) / 2;
+            demiOffset = offsetMax / 2;
           });
         }
       },
@@ -140,19 +163,55 @@ function Blobz({ id }: { id: string }) {
         />
         <meta property="og:url" content={`https://w3b.bz/nft/blobbz/${id}`} />
         <meta property="og:image" content="https://w3b.bz/images/blobzzz.png" />
+        <style>
+          {
+            "#smiley-container, #footer-main-banner { display: none; } #smiley-container *, #footer-main-banner * { animation: none!important; }"
+          }
+        </style>
       </Head>
-      {data?.tokenURI ? (
+      {data?.metadata ? (
         <>
+          <Flex position="relative" flex="1">
+            <Flex
+              position="absolute"
+              alignItems="flex-end"
+              bottom={0}
+              right={0}
+            >
+              <Flex
+                flexDirection="column"
+                alignItems="flex-end"
+                justifyContent="flex-end"
+                style={{ mixBlendMode: "difference" }}
+              >
+                <Text variant="small" color="white">
+                  {data.metadata.name}
+                </Text>
+                <Link
+                  href={`https://opensea.io/assets/matic/0xc8296a570246a690e5f53b42e47841a4ede1944c/${id}`}
+                  target="_blank"
+                  color="white"
+                >
+                  view on opensea
+                </Link>
+              </Flex>
+
+              <QRCode
+                ml={2}
+                pr={2}
+                bg="white"
+                data={`https://opensea.io/assets/matic/0xc8296a570246a690e5f53b42e47841a4ede1944c/${id}`}
+              />
+            </Flex>
+            <NFTViewer
+              metadata={data.metadata}
+              extraIframeHTML={extraIframeHTML}
+              insertionCallback={insertionCallback}
+            />
+          </Flex>
           <BannerContainer>
-            <Banner>
-              CLICK {"&"} MOVE {">>>"} DOUBLE CLICK FULLSCREEN {">>>"}
-            </Banner>
+            <Banner>{`CLICK & MOVE >>> DOUBLE CLICK FULLSCREEN >>>`}</Banner>
           </BannerContainer>
-          <NFTViewer
-            data={data.tokenURI}
-            extraIframeHTML={extraIframeHTML}
-            insertionCallback={insertionCallback}
-          />
         </>
       ) : error ? (
         <BannerContainer bg="var(--e-c80)">

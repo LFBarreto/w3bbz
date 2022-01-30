@@ -15,6 +15,7 @@ export default function About() {
         <meta property="og:image" content="https://w3b.bz/iconx512.png" />
       </Head>
       <Articles
+        pt={153}
         articlesJSON={{
           title: "About",
           subTitle:

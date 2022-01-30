@@ -9,7 +9,7 @@ const Container = styled(Flex).attrs({
   flex: 1,
   bg: "background.main",
 })`
-  flex: 1 0 calc(100% - calc(132px + 2vw));
+  flex: 1 0 100%;
 `;
 
 export default function Page({ children }: { children: React.ReactNode }) {

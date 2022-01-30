@@ -130,8 +130,7 @@ module.exports = [
       const isSameOrigin = self.origin === url.origin;
       if (!isSameOrigin) return false;
       const pathname = url.pathname;
-      console.log("SW", pathname, isSameOrigin);
-      if (pathname.startsWith("/api/blobbz")) return true;
+      if (pathname.startsWith("/api/blobbz/")) return true;
       return false;
     },
     handler: "CacheFirst",
@@ -140,6 +139,24 @@ module.exports = [
       expiration: {
         maxEntries: 512,
         maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+      },
+    },
+  },
+  {
+    urlPattern: ({ url }) => {
+      const isSameOrigin = self.origin === url.origin;
+      if (!isSameOrigin) return false;
+      const pathname = url.pathname;
+      if (pathname.startsWith("/api/blobbz/")) return false;
+      if (pathname.startsWith("/api/blobbz?page=")) return true;
+      return false;
+    },
+    handler: "CacheFirst",
+    options: {
+      cacheName: "blobz-collection-cache",
+      expiration: {
+        maxEntries: 52,
+        maxAgeSeconds: 5, // 5 min
       },
     },
   },

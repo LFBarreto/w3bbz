@@ -9,7 +9,7 @@ const Container = styled(Flex).attrs({
   justifyContent: "flex-end",
   alignItems: "flex-end",
   position: "sticky",
-  top: "0px",
+  bottom: 0,
   left: 0,
   right: 0,
   bg: "primary.c80",
@@ -56,7 +56,7 @@ export default function ConnectButton({
         ) : (
           <BannerContainer bg="var(--e-c80)">
             <Banner key="not-supported-connect-button" color="textContrast">
-              chain not suported{" "}
+              {`chain not suported XXX switch to Polygon XXX`}
             </Banner>
           </BannerContainer>
         )
@@ -84,7 +84,7 @@ export default function ConnectButton({
         ) : (
           <BannerContainer>
             <Banner key="connect-wallet-connect-button" color="textContrast">
-              Connect my wallet {">>>"}
+              {`Connect my Polygon wallet >>>`}
             </Banner>
           </BannerContainer>
         )
@@ -111,8 +111,7 @@ export default function ConnectButton({
         justifyContent="flex-end"
         alignItems="flex-end"
         width="100%"
-        pr="3rem"
-        pl={"1rem"}
+        px="0.5rem"
       >
         {notSupported && supportedChain && switchNetwork ? (
           <Button

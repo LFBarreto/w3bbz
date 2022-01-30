@@ -34,7 +34,7 @@ export default function NftHome() {
               title: "Blobz-Blockz",
               subTitle: "Generative blobz on the blockchain",
               content: `A series of 512 blobz fully generated on chain.
-              Inspired by mathmos©️ lava lamps space-age designs and yaoi kusama ❤️
+              Inspired by mathmos©️ lava lamps space-age designs and yayoi kusama ❤️
 
               This is the most technically advanced project i did so far, mixing
               pseudo random svg path generation using trigonometry on solidity,
@@ -47,12 +47,18 @@ export default function NftHome() {
               Just check the collection and mint some!
 
               `,
-              image: "/images/blobz-banner.svg",
+              image: "/images/blobzzz.svg",
               noFilterImage: true,
-              link: {
-                href: "/nft/blobbz",
-                label: ">>> view collection",
-              },
+              link: [
+                {
+                  href: "/nft/blobbz",
+                  label: ">>> mint it",
+                },
+                {
+                  href: "/nft/blobbz/collection",
+                  label: ">>> view collection",
+                },
+              ],
               hashtags: ["artz", "solidity", "svg"],
             },
             {

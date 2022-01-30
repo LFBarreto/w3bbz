@@ -24,7 +24,10 @@ const Link = styled.a.attrs<LinkProps, LinkProps>({
   min-height: 44px;
   width: min-content;
   ${(p) => p.theme.transition()}
-  &:focus, &focus-within, &focus-visible {
+  will-change: transform;
+  &:focus,
+  &focus-within,
+  &focus-visible {
     filter: invert(1)
       drop-shadow(0.3rem 0px 0px ${(p) => p.theme.colors.primary.c80});
   }

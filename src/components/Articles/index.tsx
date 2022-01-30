@@ -4,7 +4,9 @@ import NextLink from "next/link";
 import { Flex, Text, Blockquote, Image, Link, Button } from "..";
 import { FlexBoxProps } from "../Layout/Flex";
 
-const ArticleContainer = styled(Flex).attrs<{ reverse?: boolean }>(
+type ContainerProps = FlexBoxProps & { reverse?: boolean };
+
+const ArticleContainer = styled(Flex).attrs<ContainerProps, ContainerProps>(
   ({ reverse }) => ({
     flexDirection: reverse ? "row-reverse" : "row",
     justifyContent: "space-between",
@@ -13,8 +15,8 @@ const ArticleContainer = styled(Flex).attrs<{ reverse?: boolean }>(
     width: "100%",
     mt: "5rem",
   })
-)<{ reverse?: boolean }>``;
-const ArticleContent = styled(Flex).attrs<{ reverse?: boolean }>(
+)``;
+const ArticleContent = styled(Flex).attrs<ContainerProps, ContainerProps>(
   ({ reverse }) => ({
     flex: "1 1 50%",
     flexDirection: "column",
@@ -24,7 +26,7 @@ const ArticleContent = styled(Flex).attrs<{ reverse?: boolean }>(
     pr: "3rem",
     bg: "background.main",
   })
-)<{ reverse?: boolean }>`
+)`
   z-index: 3;
   min-width: 300px;
   > ${Text} {
@@ -32,14 +34,14 @@ const ArticleContent = styled(Flex).attrs<{ reverse?: boolean }>(
   }
 `;
 
-const Hashtag = styled(Text).attrs({
-  as: "a",
-  variant: "body",
-  mx: 4,
-  color: "textContrast",
-})<{ href?: string }>`
+const Hashtag = styled.a`
   text-decoration: none;
   cursor: pointer;
+  font-family: Dots-Bold;
+  line-height: 1.7rem;
+  font-size: 1rem;
+  margin: 0 10px;
+  color: var--t-contrast);
 `;
 
 const HashtagContainer = styled(Flex).attrs({
@@ -67,7 +69,7 @@ type Article = {
   children?: React.ReactNode;
   reverse?: boolean;
   hashtags?: string[];
-  link?: { href: string; label: string };
+  link?: { href: string; label: string }[];
   href?: { href: string; label: string };
 };
 
@@ -156,13 +158,15 @@ export default function Articles({ articlesJSON, ...props }: Props) {
                   {article.href.label}
                 </Link>
               ) : null}
-              {article.link ? (
-                <NextLink href={article?.link?.href}>
-                  <Button whiteSpace="nowrap" mt={4}>
-                    {article.link.label}
-                  </Button>
-                </NextLink>
-              ) : null}
+              {article.link
+                ? article.link.map((link, j) => (
+                    <NextLink key={link.href + j} href={link?.href}>
+                      <Button whiteSpace="nowrap" mt={4}>
+                        {link.label}
+                      </Button>
+                    </NextLink>
+                  ))
+                : null}
 
               {article.children}
             </ArticleContent>

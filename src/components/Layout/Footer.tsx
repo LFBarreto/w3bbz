@@ -15,7 +15,7 @@ const Container = styled(Flex).attrs({
   flex: 1,
   position: "relative",
 })`
-  min-height: calc(100% - 152px);
+  min-height: 100vh;
   background-image: var(--filter-noise);
   background-repeat: repeat;
 `;
@@ -37,10 +37,18 @@ export default function Footer() {
   const locale = getLocale();
   return (
     <Container>
-      <Banner> W3B.BZ </Banner>
+      <Banner id="footer-main-banner"> W3B.BZ </Banner>
       <SpotifyWidget />
       <Flex flex={1} />
       <LinksContainer>
+        <Link
+          href="https://w3bbz.eth.xyz/"
+          target="_blank"
+          variant="body"
+          color="textContrast"
+        >
+          w3bbz.eth
+        </Link>
         <Link
           href="https://cacahu.eth.xyz/"
           target="_blank"
@@ -50,7 +58,7 @@ export default function Footer() {
           cacahu.eth
         </Link>
         <Link
-          href="https://opensea.io/cacahueth"
+          href="https://opensea.io/w3bbz"
           target="_blank"
           variant="body"
           color="textContrast"
@@ -80,11 +88,11 @@ export default function Footer() {
         >
           mail
         </Link>
-        <Text variant="body" color="textContrast">
-          {new Date().toLocaleString(locale, {
-            year: "numeric",
-          })}
-          ~W3BBZ
+        <Text variant="body" color="textContrast" whiteSpace="nowrap">
+          {`V:${
+            process.env.VERSION_ID || process.env.NEXT_PUBLIC_VERSION_ID
+          } ${new Date().toLocaleString(locale, { year: "numeric" })}
+          ~W3BBZ`}
         </Text>
       </LinksContainer>
     </Container>
