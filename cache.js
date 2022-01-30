@@ -1,5 +1,80 @@
 "use strict";
 
+const cacheHandler = ({ request, url, event, params }) => {
+  const isValid = function (response) {
+    if (!response) return false;
+    const fetched = response.headers.get("sw-fetched-on");
+    if (
+      fetched &&
+      parseFloat(fetched) + 7 * 24 * 60 * 1000 > new Date().getTime()
+    )
+      return true;
+    return false;
+  };
+
+  return caches.open("blobz-cache").then((cache) => {
+    return cache.match(request).then(function (response) {
+      if (isValid(response)) return response;
+
+      return fetch(request).then(function (resp) {
+        const copy = resp.clone();
+        const headers = new Headers(copy.headers);
+        headers.append("sw-fetched-on", new Date().getTime());
+
+        event.waitUntil(
+          copy.blob().then(function (body) {
+            return cache.put(
+              request,
+              new Response(body, {
+                status: copy.status,
+                statusText: copy.statusText,
+                headers: headers,
+              })
+            );
+          })
+        );
+        return resp;
+      });
+    });
+  });
+};
+
+const cacheBlobzHandler = ({ request, url, event, params }) => {
+  const isValid = function (response) {
+    if (!response) return false;
+    const fetched = response.headers.get("sw-fetched-on");
+    if (fetched && parseFloat(fetched) + 5 * 60 * 1000 > new Date().getTime())
+      return true;
+    return false;
+  };
+
+  return caches.open("blobz-collection-cache").then((cache) => {
+    return cache.match(request).then(function (response) {
+      if (isValid(response)) return response;
+
+      return fetch(request).then(function (resp) {
+        const copy = resp.clone();
+        const headers = new Headers(copy.headers);
+        headers.append("sw-fetched-on", new Date().getTime());
+
+        event.waitUntil(
+          copy.blob().then(function (body) {
+            return cache.put(
+              request,
+              new Response(body, {
+                status: copy.status,
+                statusText: copy.statusText,
+                headers: headers,
+              })
+            );
+          })
+        );
+        return resp;
+      });
+    });
+  });
+};
+
 // Workbox RuntimeCaching config: https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.RuntimeCachingEntry
 module.exports = [
   {
@@ -130,10 +205,13 @@ module.exports = [
       const isSameOrigin = self.origin === url.origin;
       if (!isSameOrigin) return false;
       const pathname = url.pathname;
-      if (pathname.startsWith("/api/blobbz/")) return true;
+
+      if (pathname.startsWith("/api/blobbz")) {
+        return url.search === "";
+      }
       return false;
     },
-    handler: "CacheFirst",
+    handler: cacheHandler,
     options: {
       cacheName: "blobz-cache",
       expiration: {
@@ -147,16 +225,18 @@ module.exports = [
       const isSameOrigin = self.origin === url.origin;
       if (!isSameOrigin) return false;
       const pathname = url.pathname;
-      if (pathname.startsWith("/api/blobbz/")) return false;
-      if (pathname.startsWith("/api/blobbz?page=")) return true;
+
+      if (pathname.startsWith("/api/blobbz")) {
+        return url.search !== "";
+      }
       return false;
     },
-    handler: "CacheFirst",
+    handler: cacheBlobzHandler,
     options: {
       cacheName: "blobz-collection-cache",
       expiration: {
         maxEntries: 52,
-        maxAgeSeconds: 5, // 5 min
+        maxAgeSeconds: 5 * 60, // 5 min
       },
     },
   },
