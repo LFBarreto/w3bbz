@@ -1,104 +1,7 @@
-"use strict";
-
-const cacheHandler = ({ request, url, event, params }) => {
-  const isValid = function (response) {
-    if (!response) return false;
-    const fetched = response.headers.get("sw-fetched-on");
-    if (
-      fetched &&
-      parseFloat(fetched) + 7 * 24 * 60 * 1000 > new Date().getTime()
-    )
-      return true;
-    return false;
-  };
-
-  return caches.open("blobz-cache").then((cache) => {
-    return cache.match(request).then(function (response) {
-      if (isValid(response)) return response;
-
-      return fetch(request).then(function (resp) {
-        const copy = resp.clone();
-        const headers = new Headers(copy.headers);
-        headers.append("sw-fetched-on", new Date().getTime());
-
-        event.waitUntil(
-          copy.blob().then(function (body) {
-            return cache.put(
-              request,
-              new Response(body, {
-                status: copy.status,
-                statusText: copy.statusText,
-                headers: headers,
-              })
-            );
-          })
-        );
-        return resp;
-      });
-    });
-  });
-};
-
-const cacheBlobzHandler = ({ request, url, event, params }) => {
-  const isValid = function (response) {
-    if (!response) return false;
-    const fetched = response.headers.get("sw-fetched-on");
-    if (fetched && parseFloat(fetched) + 5 * 60 * 1000 > new Date().getTime())
-      return true;
-    return false;
-  };
-
-  return caches.open("blobz-collection-cache").then((cache) => {
-    return cache.match(request).then(function (response) {
-      if (isValid(response)) return response;
-
-      return fetch(request).then(function (resp) {
-        const copy = resp.clone();
-        const headers = new Headers(copy.headers);
-        headers.append("sw-fetched-on", new Date().getTime());
-
-        event.waitUntil(
-          copy.blob().then(function (body) {
-            return cache.put(
-              request,
-              new Response(body, {
-                status: copy.status,
-                statusText: copy.statusText,
-                headers: headers,
-              })
-            );
-          })
-        );
-        return resp;
-      });
-    });
-  });
-};
+"use-strict";
 
 // Workbox RuntimeCaching config: https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.RuntimeCachingEntry
 module.exports = [
-  {
-    urlPattern: /^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,
-    handler: "CacheFirst",
-    options: {
-      cacheName: "google-fonts-webfonts",
-      expiration: {
-        maxEntries: 4,
-        maxAgeSeconds: 365 * 24 * 60 * 60, // 365 days
-      },
-    },
-  },
-  {
-    urlPattern: /^https:\/\/fonts\.(?:googleapis)\.com\/.*/i,
-    handler: "StaleWhileRevalidate",
-    options: {
-      cacheName: "google-fonts-stylesheets",
-      expiration: {
-        maxEntries: 4,
-        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
-      },
-    },
-  },
   {
     urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
     handler: "StaleWhileRevalidate",
@@ -211,7 +114,44 @@ module.exports = [
       }
       return false;
     },
-    handler: cacheHandler,
+    handler: ({ request, url, event, params }) => {
+      function isValid(response) {
+        if (!response) return false;
+        const fetched = response.headers.get("sw-fetched-on");
+        if (
+          fetched &&
+          parseFloat(fetched) + 7 * 24 * 60 * 1000 > new Date().getTime()
+        )
+          return true;
+        return false;
+      }
+
+      return caches.open("blobz-cache").then((cache) => {
+        return cache.match(request).then(function (response) {
+          if (isValid(response)) return response;
+
+          return fetch(request).then(function (resp) {
+            const copy = resp.clone();
+            const headers = new Headers(copy.headers);
+            headers.append("sw-fetched-on", new Date().getTime());
+
+            event.waitUntil(
+              copy.blob().then(function (body) {
+                return cache.put(
+                  request,
+                  new Response(body, {
+                    status: copy.status,
+                    statusText: copy.statusText,
+                    headers: headers,
+                  })
+                );
+              })
+            );
+            return resp;
+          });
+        });
+      });
+    },
     options: {
       cacheName: "blobz-cache",
       expiration: {
@@ -231,13 +171,68 @@ module.exports = [
       }
       return false;
     },
-    handler: cacheBlobzHandler,
+    handler: ({ request, url, event, params }) => {
+      const isValid = function (response) {
+        if (!response) return false;
+        const fetched = response.headers.get("sw-fetched-on");
+        if (
+          fetched &&
+          parseFloat(fetched) + 5 * 60 * 1000 > new Date().getTime()
+        )
+          return true;
+        return false;
+      };
+
+      return caches.open("blobz-collection-cache").then((cache) => {
+        return cache.match(request).then(function (response) {
+          if (isValid(response)) return response;
+
+          return fetch(request).then(function (resp) {
+            const copy = resp.clone();
+            const headers = new Headers(copy.headers);
+            headers.append("sw-fetched-on", new Date().getTime());
+
+            event.waitUntil(
+              copy.blob().then(function (body) {
+                return cache.put(
+                  request,
+                  new Response(body, {
+                    status: copy.status,
+                    statusText: copy.statusText,
+                    headers: headers,
+                  })
+                );
+              })
+            );
+            return resp;
+          });
+        });
+      });
+    },
     options: {
       cacheName: "blobz-collection-cache",
       expiration: {
         maxEntries: 52,
         maxAgeSeconds: 5 * 60, // 5 min
       },
+    },
+  },
+  {
+    urlPattern: ({ url }) => {
+      const isSameOrigin = self.origin === url.origin;
+      if (!isSameOrigin) return false;
+      const pathname = url.pathname;
+      if (pathname.startsWith("/api/")) return false;
+      return true;
+    },
+    handler: "NetworkFirst",
+    options: {
+      cacheName: "others",
+      expiration: {
+        maxEntries: 32,
+        maxAgeSeconds: 24 * 60 * 60, // 24 hours
+      },
+      networkTimeoutSeconds: 10,
     },
   },
   {

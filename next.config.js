@@ -9,6 +9,11 @@ const nextConfig = {
   pwa: {
     dest: "public",
     runtimeCaching,
+    cacheOnFrontEndNav: true,
+    fallbacks: {
+      document: "/",
+      image: "/images/offline.svg",
+    },
   },
 };
 
