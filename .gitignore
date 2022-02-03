@@ -33,3 +33,7 @@ yarn-error.log*
 # vercel
 .vercel
 tsconfig.tsbuildinfo
+
+public/fallback-development.js
+public/sw.js*
+public/workbox-*.js*

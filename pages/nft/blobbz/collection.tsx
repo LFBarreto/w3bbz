@@ -106,6 +106,7 @@ const BlobzRow = memo(({ blobz, id }: { blobz: TokenData; id: number }) => {
         </IdLabel>
 
         <NFTViewer
+          id={blobz.id}
           metadata={blobz.metadata}
           extraIframeHTML="<style>:root{cursor: pointer;} :root:not(:hover) * { animation-play-state: paused!important} </style>"
           onIframeClick={() => router.push(`/nft/blobbz/${blobz.id}`)}

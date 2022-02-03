@@ -204,6 +204,7 @@ function Blobz({ id }: { id: string }) {
               />
             </Flex>
             <NFTViewer
+              id={data.id}
               metadata={data.metadata}
               extraIframeHTML={extraIframeHTML}
               insertionCallback={insertionCallback}
